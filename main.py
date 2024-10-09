@@ -9,44 +9,28 @@ import glm
 # Getting all the vertexes used in our project.
 
 # Creating the house.
-house = get_vertexes_house()
 index_vertexes = {}
 start = 0
-index_vertexes['house'] = [start,len(house)]
-start = len(house)
 
-# Creating the person
-person, coords_person = get_vertexes_person()
-index_vertexes['person'] = [start]
-for value in coords_person:
-    index_vertexes['person'].append(index_vertexes['person'][-1] + value)
-start = len(person) + start
+# Creating the dragon.
+dragon, coords_dragon = get_vertexes_dragon()
+index_vertexes['dragon'] = [start]
+for value in coords_dragon:
+    index_vertexes['dragon'].append(index_vertexes['dragon'][-1] + value)
 
-# Creating the ground
-ground, coords_ground, colors = get_vertexes_ground(10000)
-index_vertexes['ground'] = [start]
-for value in coords_ground:
-    index_vertexes['ground'].append(index_vertexes['ground'][-1] + value)
-start = len(ground) + start
+# Creating the mario.
+mario, coords_mario = get_vertexes_mario()
+index_vertexes['mario'] = [start]
+for value in coords_mario:
+    index_vertexes['mario'].append(index_vertexes['mario'][-1] + value)
+start = len(mario) + start
 
-# Creating the tree.
-tree, coords_tree = get_vertexes_tree()
-index_vertexes['tree'] = [start]
-for value in coords_tree:
-    index_vertexes['tree'].append(index_vertexes['tree'][-1] + value)
-start = len(tree) + start
-
-# Creating the sun.
-sun, coords_sun = get_vertexes_sun()
-index_vertexes['sun'] = [start]
-for value in coords_sun:
-    index_vertexes['sun'].append(index_vertexes['sun'][-1] + value)
 
 # Joining everyone
-vertexes = np.concatenate((house, person))
-vertexes = np.concatenate((vertexes, ground))
-vertexes = np.concatenate((vertexes, tree))
-vertexes = np.concatenate((vertexes, sun))
+vertexes_temp = np.concatenate((mario, dragon))
+vertexes = np.zeros(len(vertexes_temp), [("position", np.float32, 3)])
+vertexes['position'] = vertexes_temp
+
 
 #-----------------------------------------------------------------------------------
 # Configuring the screen used to show the objects.

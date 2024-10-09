@@ -1,10 +1,11 @@
 # File containing functions that configure the screen that will be used to show our project.
 
-import math
 import glfw
 from OpenGL.GL import *
 import glm
 import numpy as np
+import keyboard as kb
+
 
 HEIGHT = 700
 WIDTH = 700
@@ -141,8 +142,7 @@ def get_projection(program):
     return projection_matrix(), glGetUniformLocation(program, "projection")
 
 def view_matrix():
-    global cameraPos, cameraFront, cameraUp
-    mat_view = glm.lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
+    mat_view = glm.lookAt(kb.cameraPos, kb.cameraPos + kb.cameraFront, kb.cameraUp)
     mat_view = np.array(mat_view)
     return mat_view
 

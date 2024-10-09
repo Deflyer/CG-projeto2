@@ -22,6 +22,23 @@ def draw_dragon(loc_model, loc_color, size = 0):
     glUniform4f(loc_color, 0.4, 0.2, 0, 1.0)
     glDrawArrays(GL_TRIANGLES, 0, 113958) ## renderizando
 
+def desenha_mario(loc_model, loc_color, size = 0):
+    # translacao
+    t_x = 0.0; t_y = 0.0; t_z = -50.0
+    
+    # rotacao
+    angle = 0
+    r_x = 0.0; r_y = 0.0; r_z = 1.0
+    
+    # escala
+    s_x = 0.1; s_y = 0.1; s_z = 0.1
+    
+    mat_model = model(angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
+    glUniformMatrix4fv(loc_model, 1, GL_TRUE, mat_model)
+       
+    glUniform4f(loc_color, 0.4, 0.2, 0, 1.0)
+    glDrawArrays(GL_TRIANGLES, 113958, 148815 - 113958) ## renderizando
+
 def draw_tree(loc_transformation, loc_color, size):
     '''
     Draws a cylinder and a sphere above it to create a 3D tree.
@@ -44,30 +61,5 @@ def draw_tree(loc_transformation, loc_color, size):
     glUniform4f(loc_color, 0, 0.6, 0, 1.0)
     glDrawArrays(GL_TRIANGLE_STRIP, size['tree'][1], size['tree'][2] - size['tree'][1])    
 
-
-def desenha_mario():
-    
-    global vertices
-    
-    # aplica a matriz model
-    
-
-    
-    # translacao
-    t_x = 0.0; t_y = 0.0; t_z = -50.0;
-    
-    # rotacao
-    angle = 0;
-    r_x = 0.0; r_y = 0.0; r_z = 1.0;
-    
-    # escala
-    s_x = 0.1; s_y = 0.1; s_z = 0.1;
-    
-    mat_model = model(angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
-    loc_model = glGetUniformLocation(program, "model")
-    glUniformMatrix4fv(loc_model, 1, GL_TRUE, mat_model)
-       
-    # desenha o mario
-    glDrawArrays(GL_TRIANGLES, 113958, 148815 - 113958) ## renderizando
     
     

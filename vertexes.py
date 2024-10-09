@@ -57,10 +57,26 @@ def load_model_from_file(filename):
 def get_vertexes_dragon():
     vertexes = []
     size = []
-    modelo = load_model_from_file('objetos/dragao.obj')
+
+    modelo = load_model_from_file('objetos/uploads_files_4053544_house+creep.obj')
+
     for face in modelo['faces']:
         for vertice_id in face[0]: vertexes.append( modelo['vertices'][vertice_id-1] )
     size.append(len(vertexes))
+
+    return vertexes, size
+
+def get_vertexes_mario():
+    vertexes = []
+    size = []
+    
+    modelo = load_model_from_file('objetos/mario-model.obj')
+
+    for face in modelo['faces']:
+        for vertice_id in face[0]: vertexes.append( modelo['vertices'][vertice_id-1] )
+
+    size.append(len(vertexes))
+
     return vertexes, size
 
 def get_vertexes_tree():

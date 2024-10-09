@@ -13,6 +13,11 @@ person_speed = 0
 cameraPos   = glm.vec3(0.0,  0.0,  1.0)
 cameraFront = glm.vec3(0.0,  0.0, -1.0)
 cameraUp    = glm.vec3(0.0,  1.0,  0.0)
+firstMouse = True
+yaw = -90.0 
+pitch = 0.0
+lastX =  700/2
+lastY =  700/2
 
 def key_event(window,key,scancode,action,mods):
     global polyMode
