@@ -3,6 +3,7 @@
 
 import numpy as np
 from geometric_transf import *
+<<<<<<< HEAD
 from shapes import *
 from PIL import Image
 from OpenGL.GL import *
@@ -24,6 +25,8 @@ def load_texture_from_file(texture_id, img_textura):
     #image_data = np.array(list(img.getdata()), np.uint8)
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img_width, img_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image_data)
 
+=======
+>>>>>>> a7cb7ec4f49b3f63d9e55d3a8b02b2a0e549105f
 
 def load_model_from_file(filename):
     """Loads a Wavefront OBJ file. """
