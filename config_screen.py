@@ -6,14 +6,18 @@ import glm
 import numpy as np
 import keyboard as kb
 
-
-HEIGHT = 700
-WIDTH = 700
+HEIGHT = 1600
+WIDTH = 1200
 WINDOW_NAME = 'Project 2'
+QTT_TEXTURES = 4
+
+
 
 # Shaders' code.
 vertex_code = """
         attribute vec3 position;
+        attribute vec2 texture_coord;
+        varying vec2 out_texture;
                 
         uniform mat4 model;
         uniform mat4 view;
@@ -21,12 +25,17 @@ vertex_code = """
         
         void main(){
             gl_Position = projection * view * model * vec4(position,1.0);
+            out_texture = vec2(texture_coord);
         }
         """
 fragment_code = """
         uniform vec4 color;
+        varying vec2 out_texture;
+        uniform sampler2D samplerTexture;
+
         void main(){
-            gl_FragColor = color;
+            vec4 texture = texture2D(samplerTexture, out_texture);
+            gl_FragColor = texture;
         }
         """
 
@@ -85,25 +94,34 @@ def create_program():
 
     return program
 
-def send_data_to_gpu(program, vertexes):
+def send_data_to_gpu(program, vertexes, textures):
     '''
     Requests GPU slots to program data and then sends this data to this slot.
     '''
 
     # Request a buffer slot from GPU.
     buffer = glGenBuffers(2)
+
+
+    # Sending vertexes data to this GPU variable.
     glBindBuffer(GL_ARRAY_BUFFER, buffer[0])
+    glBufferData(GL_ARRAY_BUFFER, vertexes.nbytes, vertexes, GL_STATIC_DRAW)
+    stride = vertexes.strides[0]
+    offset = ctypes.c_void_p(0)
 
     # Localize the GPU variable (the one we defined in vertex shader) that represents each vertex.
     loc_vertex = glGetAttribLocation(program, "position")
     glEnableVertexAttribArray(loc_vertex)
-
-    # Sending vertexes data to this GPU variable.
-    glBufferData(GL_ARRAY_BUFFER, vertexes.nbytes, vertexes, GL_DYNAMIC_DRAW)
-    glBindBuffer(GL_ARRAY_BUFFER, buffer[0])
-    stride = vertexes.strides[0]
-    offset = ctypes.c_void_p(0)
     glVertexAttribPointer(loc_vertex, 3, GL_FLOAT, False, stride, offset)
+
+    # Sending textures data to this GPU variable.
+    glBindBuffer(GL_ARRAY_BUFFER, buffer[1])
+    glBufferData(GL_ARRAY_BUFFER, textures.nbytes, textures, GL_STATIC_DRAW)
+    stride = textures.strides[0]
+    offset = ctypes.c_void_p(0)
+    loc_texture_coord = glGetAttribLocation(program, "texture_coord")
+    glEnableVertexAttribArray(loc_texture_coord)
+    glVertexAttribPointer(loc_texture_coord, 2, GL_FLOAT, False, stride, offset)
 
 def render_window(window):
     '''

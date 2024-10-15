@@ -4,7 +4,7 @@ from OpenGL.GL import *
 from geometric_transf import *
 import keyboard as kb
 
-def draw_dragon(loc_model, loc_color, size = 0):    
+def draw_dragon(loc_model, loc_color, size):    
     # rotacao
     angle = 0.0
     r_x = 0.0; r_y = 0.0; r_z = 1.0
@@ -19,10 +19,37 @@ def draw_dragon(loc_model, loc_color, size = 0):
     glUniformMatrix4fv(loc_model, 1, GL_TRUE, mat_model)
        
     # desenha o dragao
-    glUniform4f(loc_color, 0.4, 0.2, 0, 1.0)
-    glDrawArrays(GL_TRIANGLES, 0, 113958) ## renderizando
+    glBindTexture(GL_TEXTURE_2D, 1)
+    glDrawArrays(GL_TRIANGLES, size['dragon'][0], size['dragon'][1] - size['dragon'][0]) ## renderizando
 
-def desenha_mario(loc_model, loc_color, size = 0):
+def draw_tree2(loc_model, loc_color, size):
+    # rotacao
+    
+    angle = 0.0
+    r_x = 0.0; r_y = 0.0; r_z = 1.0
+    
+    # translacao
+    t_x = -10.0; t_y = -1.0; t_z = 15.0
+    
+    # escala
+    s_x = 7.0; s_y = 7.0; s_z = 7.0
+    
+    mat_model = model(angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
+    glUniformMatrix4fv(loc_model, 1, GL_TRUE, mat_model)
+
+    ### desenho o tronco da arvore
+    #define id da textura do modelo
+    glBindTexture(GL_TEXTURE_2D, 0)
+    # desenha o modelo
+    glDrawArrays(GL_TRIANGLES, size['tree2'][0], size['tree2'][1] - size['tree2'][0]) ## renderizando
+    
+    ### desenho as folhas
+    #define id da textura do modelo
+    glBindTexture(GL_TEXTURE_2D, 1)
+    # desenha o modelo
+    glDrawArrays(GL_TRIANGLES, size['tree2'][1], size['tree2'][2] - size['tree2'][1]) ## renderizando    
+
+def desenha_mario(loc_model, loc_color, size):
     # translacao
     t_x = 0.0; t_y = 0.0; t_z = -50.0
     
@@ -37,7 +64,38 @@ def desenha_mario(loc_model, loc_color, size = 0):
     glUniformMatrix4fv(loc_model, 1, GL_TRUE, mat_model)
        
     glUniform4f(loc_color, 0.4, 0.2, 0, 1.0)
-    glDrawArrays(GL_TRIANGLES, 113958, 148815 - 113958) ## renderizando
+    glDrawArrays(GL_TRIANGLES, size['mario'][0], size['mario'][1] - size['mario'][0]) ## renderizando
+
+def desenha_Container(loc_model, loc_color, size = 0):
+    
+    
+    # aplica a matriz model
+    
+    # rotacao
+    angle = 210.0
+    r_x = 0.0; r_y = 1.0; r_z = 0.0
+    
+    # translacao
+    t_x = 0.0; t_y = 0.0; t_z = 15.0
+    
+    # escala
+    s_x = 0.015; s_y = 0.015; s_z = 0.015
+    
+    mat_model = model(angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
+    glUniformMatrix4fv(loc_model, 1, GL_FALSE, mat_model)
+
+    #desenha container
+    #define id da textura do modelo
+    glBindTexture(GL_TEXTURE_2D, 2)
+    # desenha o modelo
+    glDrawArrays(GL_TRIANGLES, 41172, 91248-41172) ## renderizando
+
+    #desenha o ar condicionado
+    #define id da textura do modelo
+    glBindTexture(GL_TEXTURE_2D, 3)
+    # desenha o modelo
+    glDrawArrays(GL_TRIANGLES, 91248, 118005-91248) ## renderizando
+    
 
 def draw_tree(loc_transformation, loc_color, size):
     '''
