@@ -38,7 +38,7 @@ def draw_house(loc_model, loc_color, size):
        
     # desenha o dragao
     for i in range(len(size['house']) - 1):
-        glBindTexture(GL_TEXTURE_2D, i % 2)
+        glBindTexture(GL_TEXTURE_2D, (i + 1) % 3)
         glDrawArrays(GL_TRIANGLES, size['house'][i], size['house'][i +1] - size['house'][i]) ## renderizando
         
 
