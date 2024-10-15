@@ -19,8 +19,28 @@ def draw_dragon(loc_model, loc_color, size):
     glUniformMatrix4fv(loc_model, 1, GL_TRUE, mat_model)
        
     # desenha o dragao
-    glBindTexture(GL_TEXTURE_2D, 1)
+    glBindTexture(GL_TEXTURE_2D, 0)
     glDrawArrays(GL_TRIANGLES, size['dragon'][0], size['dragon'][1] - size['dragon'][0]) ## renderizando
+
+def draw_house(loc_model, loc_color, size):    
+    # rotacao
+    angle = 0.0
+    r_x = 0.0; r_y = 0.0; r_z = 1.0
+    
+    # translacao
+    t_x = 0.0; t_y = 10.0; t_z = -20.0
+    
+    # escala
+    s_x = 1.0; s_y = 1.0; s_z = 1.0
+    
+    mat_model = model(angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
+    glUniformMatrix4fv(loc_model, 1, GL_TRUE, mat_model)
+       
+    # desenha o dragao
+    for i in range(len(size['house']) - 1):
+        glBindTexture(GL_TEXTURE_2D, i % 2)
+        glDrawArrays(GL_TRIANGLES, size['house'][i], size['house'][i +1] - size['house'][i]) ## renderizando
+        
 
 def draw_tree2(loc_model, loc_color, size):
     # rotacao
@@ -48,7 +68,7 @@ def draw_tree2(loc_model, loc_color, size):
     glBindTexture(GL_TEXTURE_2D, 1)
     # desenha o modelo
     glDrawArrays(GL_TRIANGLES, size['tree2'][1], size['tree2'][2] - size['tree2'][1]) ## renderizando    
-
+    
 def desenha_mario(loc_model, loc_color, size):
     # translacao
     t_x = 0.0; t_y = 0.0; t_z = -50.0

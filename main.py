@@ -26,8 +26,9 @@ start = 0
 tree2, coords_tree2, textures_tree2 = get_vertexes_tree2()
 print(start)
 index_vertexes['tree2'] = [start]
+# We use a different method to read from an obj file, so different save
 for value in coords_tree2:
-    index_vertexes['tree2'].append(index_vertexes['tree2'][-1] + value)
+    index_vertexes['tree2'].append(start + value)
 start = len(tree2) + start
 
 # Creating the dragon.
@@ -36,6 +37,14 @@ index_vertexes['dragon'] = [start]
 for value in coords_dragon:
     index_vertexes['dragon'].append(index_vertexes['dragon'][-1] + value)
 start = len(dragon) + start
+
+
+# Creating the house.
+house, coords_house, textures_house = get_vertexes_house()
+index_vertexes['house'] = [start]
+for value in coords_house:
+    index_vertexes['house'].append(index_vertexes['house'][-1] + value)
+start = len(house) + start
 
 # Creating the mario.
 mario, coords_mario = get_vertexes_mario()
@@ -48,11 +57,11 @@ start = len(mario) + start
 
 # Joining everyone
 vertexes_temp = np.concatenate((tree2, dragon))
-vertexes_temp = np.concatenate((vertexes_temp, mario))
+vertexes_temp = np.concatenate((vertexes_temp, house))
 vertexes = np.zeros(len(vertexes_temp), [("position", np.float32, 3)])
 vertexes['position'] = vertexes_temp
 
-textures_temp = textures_tree2 + textures_dragon
+textures_temp = textures_tree2 + textures_dragon + textures_house
 textures = np.zeros(len(textures_temp), [("position", np.float32, 2)]) # duas coordenadas
 textures['position'] = textures_temp
 
@@ -91,7 +100,8 @@ while not glfw.window_should_close(window):
     glClearColor(1.0, 1.0, 1.0, 1.0)
 
     # Drawing the objects.
-    #draw_dragon(loc_model, loc_color,index_vertexes)
+    draw_dragon(loc_model, loc_color,index_vertexes)
+    draw_house(loc_model, loc_color, index_vertexes)
     draw_tree2(loc_model, loc_color,index_vertexes)
 
     mat_view, loc_view = get_view(program)

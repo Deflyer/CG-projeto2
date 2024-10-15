@@ -3,7 +3,6 @@
 
 import numpy as np
 from geometric_transf import *
-<<<<<<< HEAD
 from shapes import *
 from PIL import Image
 from OpenGL.GL import *
@@ -25,8 +24,6 @@ def load_texture_from_file(texture_id, img_textura):
     #image_data = np.array(list(img.getdata()), np.uint8)
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img_width, img_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image_data)
 
-=======
->>>>>>> a7cb7ec4f49b3f63d9e55d3a8b02b2a0e549105f
 
 def load_model_from_file(filename):
     """Loads a Wavefront OBJ file. """
@@ -76,6 +73,30 @@ def load_model_from_file(filename):
 
     return model
 
+def get_vertexes_house():
+    vertexes = []
+    size = []
+    textures_coord_list = []
+
+
+    modelo = load_model_from_file('objetos/casa.obj')
+
+
+    faces_visited = []
+    for face in modelo['faces']:
+        if face[2] not in faces_visited:
+            size.append(len(vertexes))
+            faces_visited.append(face[2])
+        for vertice_id in face[0]:
+            vertexes.append( modelo['vertices'][vertice_id-1] )
+        for texture_id in face[1]:
+            textures_coord_list.append( modelo['texture'][texture_id-1] )
+
+    size.append(len(vertexes))
+    print(size)
+    return vertexes, size, textures_coord_list
+
+
 def get_vertexes_dragon():
     vertexes = []
     size = []
@@ -90,7 +111,7 @@ def get_vertexes_dragon():
             textures_coord_list.append( modelo['texture'][texture_id-1] )
 
     size.append(len(vertexes))
-
+    print(size)
     return vertexes, size, textures_coord_list
 
 def get_vertexes_tree2():
@@ -103,14 +124,12 @@ def get_vertexes_tree2():
     faces_visited = []
     for face in modelo['faces']:
         if face[2] not in faces_visited:
-            print(face[2],' vertice inicial abaa=',len(vertexes))
             size.append(len(vertexes))
             faces_visited.append(face[2])
         for vertice_id in face[0]:
             vertexes.append( modelo['vertices'][vertice_id-1] )
         for texture_id in face[1]:
             textures_coord_list.append( modelo['texture'][texture_id-1] )
-    print('Processando modelo arvore.obj. Vertice final:',len(vertexes))
 
     size.append(len(vertexes))
     ### carregando textura equivalente e definindo um id (buffer): use um id por textura!
