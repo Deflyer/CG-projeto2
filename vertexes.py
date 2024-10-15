@@ -4,7 +4,6 @@
 import numpy as np
 import random
 from geometric_transf import *
-from shapes import *
 
 def load_model_from_file(filename):
     """Loads a Wavefront OBJ file. """
