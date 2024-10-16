@@ -3,11 +3,10 @@
 
 import numpy as np
 from geometric_transf import *
-from shapes import *
 from PIL import Image
 from OpenGL.GL import *
 
-
+# Load files from the code developed by our professor
 def load_texture_from_file(texture_id, img_textura):
     glBindTexture(GL_TEXTURE_2D, texture_id)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT)
@@ -18,10 +17,9 @@ def load_texture_from_file(texture_id, img_textura):
     print(img_textura,img.mode)
     img_width = img.size[0]
     img_height = img.size[1]
-    #image_data = img.tobytes("raw", "RGB", 0, -1)
+
     image_data = img.convert("RGBA").tobytes("raw", "RGBA",0,-1)
 
-    #image_data = np.array(list(img.getdata()), np.uint8)
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img_width, img_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image_data)
 
 
@@ -73,15 +71,16 @@ def load_model_from_file(filename):
 
     return model
 
+# Responsible for loading the house vertexes and textures
 def get_vertexes_house():
     vertexes = []
     size = []
     textures_coord_list = []
 
 
-    modelo = load_model_from_file('objetos/casa.obj')
+    modelo = load_model_from_file('objetos/casa/casa.obj')
 
-
+    # Allow for more the one texture
     faces_visited = []
     for face in modelo['faces']:
         if face[2] not in faces_visited:
@@ -92,11 +91,12 @@ def get_vertexes_house():
         for texture_id in face[1]:
             textures_coord_list.append( modelo['texture'][texture_id-1] )
 
+    load_texture_from_file(2,'objetos/casa/grama.jpg')
     size.append(len(vertexes))
     print(size)
     return vertexes, size, textures_coord_list
 
-
+# Responsible for loading the dragon vertexes and textures
 def get_vertexes_dragon():
     vertexes = []
     size = []
@@ -105,6 +105,7 @@ def get_vertexes_dragon():
 
     modelo = load_model_from_file('objetos/dragao.obj')
 
+    # Allows only one texture
     for face in modelo['faces']:
         for vertice_id in face[0]: vertexes.append( modelo['vertices'][vertice_id-1] )
         for texture_id in face[1]:
@@ -114,6 +115,7 @@ def get_vertexes_dragon():
     print(size)
     return vertexes, size, textures_coord_list
 
+# Responsible for loading the tree vertexes and textures
 def get_vertexes_tree2():
     vertexes = []
     size = []
@@ -121,6 +123,7 @@ def get_vertexes_tree2():
     
     modelo = load_model_from_file('objetos/arvore/arvore10.obj')
 
+    # Allows more then one textures
     faces_visited = []
     for face in modelo['faces']:
         if face[2] not in faces_visited:
@@ -132,42 +135,23 @@ def get_vertexes_tree2():
             textures_coord_list.append( modelo['texture'][texture_id-1] )
 
     size.append(len(vertexes))
-    ### carregando textura equivalente e definindo um id (buffer): use um id por textura!
+    ### Loading textures, each with it's own id.
     load_texture_from_file(0,'objetos/arvore/bark_0021.jpg')
     load_texture_from_file(1,'objetos/arvore/DB2X2_L01.png')
     print(size)
 
     return vertexes, size[1:], textures_coord_list
 
+# Responsible for loading the mario vertexes and textures
 def get_vertexes_mario():
     vertexes = []
     size = []
     
     modelo = load_model_from_file('objetos/mario-model.obj')
-
+    # No texturesfor this one
     for face in modelo['faces']:
         for vertice_id in face[0]: vertexes.append( modelo['vertices'][vertice_id-1] )
 
     size.append(len(vertexes))
 
     return vertexes, size
-
-def get_vertexes_tree():
-    '''
-    Returns an array containing all the vertexes of our tree object.
-
-    The tree is created by positioning a sphere above a cylinder.
-    '''
-
-    # Generating the cylinder and sphere vertexes.
-    cyl = cylinder(0.1,0.9)
-    sph = sphere(0.3)
-    vertexes = np.concatenate((cyl, sph))
-
-    # Creating an array containing the amount of vertexes used in each shape.
-    size = []
-    size.append(len(cyl))
-    size.append(len(sph))
-
-    return vertexes, size
-

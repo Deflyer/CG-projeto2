@@ -1,5 +1,5 @@
 # File used to handle keyboard events.
-
+# Most of the logic is from the code of our professor
 import math
 import glfw
 import glm
@@ -21,11 +21,6 @@ lastY =  700/2
 
 def key_event(window,key,scancode,action,mods):
     global polyMode
-    global tree_scale
-    global sun_rot
-    global sun_speed
-    global person_step
-    global person_speed
     global cameraPos
     global cameraFront
     global cameraUp
@@ -63,8 +58,8 @@ def mouse_event(window, xpos, ypos):
     xoffset *= sensitivity
     yoffset *= sensitivity
 
-    yaw += xoffset;
-    pitch += yoffset;
+    yaw += xoffset
+    pitch += yoffset
 
     
     if pitch >= 90.0: pitch = 90.0

@@ -1,3 +1,5 @@
+# File responsible for converting an .obj based on squares to an .obj based on triangles
+
 def convert_quads_to_triangles(input_obj, output_obj):
     with open(input_obj, 'r') as infile, open(output_obj, 'w') as outfile:
         for line in infile:
@@ -9,7 +11,7 @@ def convert_quads_to_triangles(input_obj, output_obj):
                 else:
                     outfile.write(line)  # Leave triangles or other faces untouched
             else:
-                outfile.write(line)  # Copy other lines (e.g., vertex definitions) as is
+                outfile.write(line)
 
 # Call the function with input and output .obj filenames
 convert_quads_to_triangles('objetos/uploads_files_4053544_house+creep.obj', 'objetos/casa.obj')

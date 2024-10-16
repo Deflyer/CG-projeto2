@@ -6,6 +6,8 @@ from vertexes import *
 import keyboard as kb
 import glm
 
+
+# Configuring the screen used to show the objects with textures.
 window = init_window()
 program = create_program()
 
@@ -14,14 +16,14 @@ glEnable( GL_BLEND )
 glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA )
 glEnable(GL_LINE_SMOOTH)
 glEnable(GL_TEXTURE_2D)
-qtd_texturas = 4
-textures = glGenTextures(qtd_texturas)
-# Getting all the vertexes used in our project.
+qtt_textures = 4
+textures = glGenTextures(qtt_textures)
 
-# Creating the house.
+# Getting all the vertexes and textures used in our project.
 index_vertexes = {}
 textures_coord_list = []
 start = 0
+
 # Creating the tree2.
 tree2, coords_tree2, textures_tree2 = get_vertexes_tree2()
 print(start)
@@ -53,8 +55,6 @@ for value in coords_mario:
     index_vertexes['mario'].append(index_vertexes['mario'][-1] + value)
 start = len(mario) + start
 
-
-
 # Joining everyone
 vertexes_temp = np.concatenate((tree2, dragon))
 vertexes_temp = np.concatenate((vertexes_temp, house))
@@ -62,11 +62,11 @@ vertexes = np.zeros(len(vertexes_temp), [("position", np.float32, 3)])
 vertexes['position'] = vertexes_temp
 
 textures_temp = textures_tree2 + textures_dragon + textures_house
-textures = np.zeros(len(textures_temp), [("position", np.float32, 2)]) # duas coordenadas
+textures = np.zeros(len(textures_temp), [("position", np.float32, 2)])
 textures['position'] = textures_temp
 
 #-----------------------------------------------------------------------------------
-# Configuring the screen used to show the objects.
+# Sending and rendering the objects.
 send_data_to_gpu(program, vertexes, textures)
 render_window(window)
 

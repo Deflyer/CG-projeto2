@@ -5,6 +5,10 @@ import numpy as np
 import glm
 
 def model(angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z):
+    """
+    Dealls with all the transformations of a object
+    Equivalent to the model matrix
+    """
     
     angle = math.radians(angle)
     
