@@ -78,7 +78,7 @@ def get_vertexes_house():
     textures_coord_list = []
 
 
-    modelo = load_model_from_file('objetos/casa/casa.obj')
+    modelo = load_model_from_file('objects/casa/casa.obj')
 
     # Allow for more the one texture
     faces_visited = []
@@ -91,7 +91,7 @@ def get_vertexes_house():
         for texture_id in face[1]:
             textures_coord_list.append( modelo['texture'][texture_id-1] )
 
-    load_texture_from_file(2,'objetos/casa/grama.jpg')
+    load_texture_from_file(2,'objects/casa/grama.jpg')
     size.append(len(vertexes))
     print(size)
     return vertexes, size, textures_coord_list
@@ -103,7 +103,7 @@ def get_vertexes_dragon():
     textures_coord_list = []
 
 
-    modelo = load_model_from_file('objetos/dragao.obj')
+    modelo = load_model_from_file('objects/dragao.obj')
 
     # Allows only one texture
     for face in modelo['faces']:
@@ -121,7 +121,7 @@ def get_vertexes_tree2():
     size = []
     textures_coord_list = []
     
-    modelo = load_model_from_file('objetos/arvore/arvore10.obj')
+    modelo = load_model_from_file('objects/arvore/arvore10.obj')
 
     # Allows more then one textures
     faces_visited = []
@@ -136,8 +136,8 @@ def get_vertexes_tree2():
 
     size.append(len(vertexes))
     ### Loading textures, each with it's own id.
-    load_texture_from_file(0,'objetos/arvore/bark_0021.jpg')
-    load_texture_from_file(1,'objetos/arvore/DB2X2_L01.png')
+    load_texture_from_file(0,'objects/arvore/bark_0021.jpg')
+    load_texture_from_file(1,'objects/arvore/DB2X2_L01.png')
     print(size)
 
     return vertexes, size[1:], textures_coord_list
@@ -147,7 +147,7 @@ def get_vertexes_mario():
     vertexes = []
     size = []
     
-    modelo = load_model_from_file('objetos/mario-model.obj')
+    modelo = load_model_from_file('objects/mario-model.obj')
     # No texturesfor this one
     for face in modelo['faces']:
         for vertice_id in face[0]: vertexes.append( modelo['vertices'][vertice_id-1] )

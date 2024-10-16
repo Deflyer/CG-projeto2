@@ -14,4 +14,4 @@ def convert_quads_to_triangles(input_obj, output_obj):
                 outfile.write(line)
 
 # Call the function with input and output .obj filenames
-convert_quads_to_triangles('objetos/uploads_files_4053544_house+creep.obj', 'objetos/casa.obj')
+convert_quads_to_triangles('objects/uploads_files_4053544_house+creep.obj', 'objects/casa.obj')
