@@ -84,7 +84,7 @@ def get_vertexes_house():
     size = []
     textures_coord_list = []
 
-    modelo = load_model_from_file('objects/casa/casa.obj')
+    modelo = load_model_from_file('objects/house/c.obj')
 
     # Allow for more the one texture.
     faces_visited = []
@@ -97,7 +97,14 @@ def get_vertexes_house():
         for texture_id in face[1]:
             textures_coord_list.append( modelo['texture'][texture_id-1] )
 
-    load_texture_from_file(2,'objects/casa/grama.jpg')
+    load_texture_from_file(2,'objects/house/cot1.png')
+    load_texture_from_file(3,'objects/house/cot2.png')
+    load_texture_from_file(4,'objects/house/cot3.png')
+    load_texture_from_file(5,'objects/house/cot4.png')
+    load_texture_from_file(6,'objects/house/cot5.png')
+    load_texture_from_file(7,'objects/house/cot6.png')
+    load_texture_from_file(8,'objects/house/cot7.png')
+    load_texture_from_file(9,'objects/house/cot8.png')
     size.append(len(vertexes))
     print(size)
     return vertexes, size, textures_coord_list

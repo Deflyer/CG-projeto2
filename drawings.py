@@ -28,17 +28,19 @@ def draw_house(loc_model, loc_color, size):
     r_x = 0.0; r_y = 0.0; r_z = 1.0
     
     # translade
-    t_x = 0.0; t_y = 1.0; t_z = -20.0
+    t_x = 0.0; t_y = -1.0; t_z = -20.0
     
     # scale
-    s_x = 1.0; s_y = 1.0; s_z = 1.0
+    s_x = 1; s_y = 1; s_z = 1
     
     mat_model = get_mat_model(angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
     glUniformMatrix4fv(loc_model, 1, GL_TRUE, mat_model)
     
     # draws each house face with a texture
+    text = [0,6,2]
+    print(len(size['house']))
     for i in range(len(size['house']) - 1):
-        glBindTexture(GL_TEXTURE_2D, (i + 1) % 3)
+        glBindTexture(GL_TEXTURE_2D, text[i])
         glDrawArrays(GL_TRIANGLES, size['house'][i], size['house'][i +1] - size['house'][i]) ## renderizando
         
 
