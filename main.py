@@ -6,7 +6,6 @@ from vertexes import *
 import keyboard as kb
 import glm
 
-
 # Configuring the screen used to show the objects with textures.
 window = init_window()
 program = create_program()
@@ -40,7 +39,6 @@ for value in coords_dragon:
     index_vertexes['dragon'].append(index_vertexes['dragon'][-1] + value)
 start = len(dragon) + start
 
-
 # Creating the house.
 house, coords_house, textures_house = get_vertexes_house()
 index_vertexes['house'] = [start]
@@ -66,6 +64,7 @@ textures = np.zeros(len(textures_temp), [("position", np.float32, 2)])
 textures['position'] = textures_temp
 
 #-----------------------------------------------------------------------------------
+
 # Sending and rendering the objects.
 send_data_to_gpu(program, vertexes, textures)
 render_window(window)
@@ -75,13 +74,16 @@ glfw.set_key_callback(window,kb.key_event)
 glfw.set_cursor_pos_callback(window, kb.mouse_event)
 
 #-----------------------------------------------------------------------------------
+
 # Getting GPU variables.
 
 loc_color = get_loc_color(program)
 mat_view, loc_view = get_view(program)
 mat_projection, loc_projection = get_projection(program)
 loc_model = glGetUniformLocation(program, "model")
+
 #-----------------------------------------------------------------------------------
+
 # Code main loop.
 while not glfw.window_should_close(window):
     # Reading user interactions.

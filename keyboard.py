@@ -1,5 +1,6 @@
 # File used to handle keyboard events.
 # Most of the logic is from the code of our professor
+
 import math
 import glfw
 import glm

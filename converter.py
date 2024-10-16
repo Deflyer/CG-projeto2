@@ -1,8 +1,13 @@
 # File responsible for converting objects and images to the ones we use
+
 import imageio
 from PIL import Image
 
-def convert_quads_to_triangles(input_obj, output_obj):
+def convert_squares_to_triangles(input_obj, output_obj):
+    '''
+    Convert .obj files guided by squares into files guided by triangles
+    '''
+
     with open(input_obj, 'r') as infile, open(output_obj, 'w') as outfile:
         for line in infile:
             if line.startswith('f '):
@@ -16,6 +21,10 @@ def convert_quads_to_triangles(input_obj, output_obj):
                 outfile.write(line)
 
 def convert_dds_to_png(dds_file, png_file):
+    '''
+    Convert .dds file to a .png file.
+    '''
+
     # Read the DDS file using imageio
     dds_image = imageio.imread(dds_file)
     
@@ -27,6 +36,7 @@ def convert_dds_to_png(dds_file, png_file):
     print(f"Converted {dds_file} to {png_file}")
 
 if __name__ == "__main__":
+    
     option = int(input("0 para converter imagem, 1 para converter obj\n"))
     if option == 0:
         src = input("Path to .dds image\n")
@@ -35,4 +45,4 @@ if __name__ == "__main__":
     if option == 1:
         src = input("Path to.obj\n")
         dest = input("Path to save .obj\n")
-        convert_quads_to_triangles(src, dest)
+        convert_squares_to_triangles(src, dest)

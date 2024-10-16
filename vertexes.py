@@ -1,13 +1,16 @@
-# File contaning functions that have the vertexes used to created a object. It is a simpler way to modularize
-# our objects without using a bunch of files.
+# File contaning functions that have the vertexes used to created a object. It 
+# is a simpler way to modularize our objects without using a bunch of files.
 
 import numpy as np
 from geometric_transf import *
 from PIL import Image
 from OpenGL.GL import *
 
-# Load files from the code developed by our professor
 def load_texture_from_file(texture_id, img_textura):
+    '''
+    Load files from the code developed by our professor.
+    '''
+    
     glBindTexture(GL_TEXTURE_2D, texture_id)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT)
@@ -24,7 +27,10 @@ def load_texture_from_file(texture_id, img_textura):
 
 
 def load_model_from_file(filename):
-    """Loads a Wavefront OBJ file. """
+    '''
+    Loads a Wavefront OBJ file.    
+    '''
+
     objects = {}
     vertices = []
     texture_coords = []
@@ -33,22 +39,20 @@ def load_model_from_file(filename):
     material = None
 
     # abre o arquivo obj para leitura
-    for line in open(filename, "r"): ## para cada linha do arquivo .obj
-        if line.startswith('#'): continue ## ignora comentarios
+    for line in open(filename, "r"): # para cada linha do arquivo .obj
+        if line.startswith('#'): continue # ignora comentarios
         values = line.split() # quebra a linha por espaço
         if not values: continue
 
-
-        ### recuperando vertices
+        # recuperando vertices
         if values[0] == 'v':
             vertices.append(values[1:4])
 
-
-        ### recuperando coordenadas de textura
+        # recuperando coordenadas de textura
         elif values[0] == 'vt':
             texture_coords.append(values[1:3])
 
-        ### recuperando faces 
+        # recuperando faces 
         elif values[0] in ('usemtl', 'usemat'):
             material = values[1]
         elif values[0] == 'f':
@@ -71,16 +75,18 @@ def load_model_from_file(filename):
 
     return model
 
-# Responsible for loading the house vertexes and textures
 def get_vertexes_house():
+    '''
+    Responsible for loading the house vertexes and textures.    
+    '''
+    
     vertexes = []
     size = []
     textures_coord_list = []
 
-
     modelo = load_model_from_file('objects/casa/casa.obj')
 
-    # Allow for more the one texture
+    # Allow for more the one texture.
     faces_visited = []
     for face in modelo['faces']:
         if face[2] not in faces_visited:
@@ -96,16 +102,18 @@ def get_vertexes_house():
     print(size)
     return vertexes, size, textures_coord_list
 
-# Responsible for loading the dragon vertexes and textures
 def get_vertexes_dragon():
+    '''
+    Responsible for loading the dragon vertexes and textures.
+    '''
+
     vertexes = []
     size = []
     textures_coord_list = []
 
-
     modelo = load_model_from_file('objects/dragao.obj')
 
-    # Allows only one texture
+    # Allows only one texture.
     for face in modelo['faces']:
         for vertice_id in face[0]: vertexes.append( modelo['vertices'][vertice_id-1] )
         for texture_id in face[1]:
@@ -115,15 +123,18 @@ def get_vertexes_dragon():
     print(size)
     return vertexes, size, textures_coord_list
 
-# Responsible for loading the tree vertexes and textures
 def get_vertexes_tree2():
+    '''
+    Responsible for loading the tree vertexes and textures.
+    '''
+    
     vertexes = []
     size = []
     textures_coord_list = []
     
     modelo = load_model_from_file('objects/arvore/arvore10.obj')
 
-    # Allows more then one textures
+    # Allows more then one textures.
     faces_visited = []
     for face in modelo['faces']:
         if face[2] not in faces_visited:
@@ -135,20 +146,25 @@ def get_vertexes_tree2():
             textures_coord_list.append( modelo['texture'][texture_id-1] )
 
     size.append(len(vertexes))
-    ### Loading textures, each with it's own id.
+
+    # Loading textures, each with it's own id.
     load_texture_from_file(0,'objects/arvore/bark_0021.jpg')
     load_texture_from_file(1,'objects/arvore/DB2X2_L01.png')
     print(size)
 
     return vertexes, size[1:], textures_coord_list
 
-# Responsible for loading the mario vertexes and textures
 def get_vertexes_mario():
+    '''
+    Responsible for loading the mario vertexes and textures.
+    '''
+    
     vertexes = []
     size = []
     
     modelo = load_model_from_file('objects/mario-model.obj')
-    # No texturesfor this one
+
+    # No textures for this one.
     for face in modelo['faces']:
         for vertice_id in face[0]: vertexes.append( modelo['vertices'][vertice_id-1] )
 

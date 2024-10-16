@@ -11,8 +11,6 @@ WIDTH = 1200
 WINDOW_NAME = 'Project 2'
 QTT_TEXTURES = 4
 
-
-
 # Shaders' code.
 vertex_code = """
         attribute vec3 position;

@@ -15,7 +15,7 @@ def draw_dragon(loc_model, loc_color, size):
     # scale
     s_x = 1.0; s_y = 1.0; s_z = 1.0
     
-    mat_model = model(angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
+    mat_model = get_mat_model(angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
     glUniformMatrix4fv(loc_model, 1, GL_TRUE, mat_model)
        
     # draws the dragon
@@ -33,7 +33,7 @@ def draw_house(loc_model, loc_color, size):
     # scale
     s_x = 1.0; s_y = 1.0; s_z = 1.0
     
-    mat_model = model(angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
+    mat_model = get_mat_model(angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
     glUniformMatrix4fv(loc_model, 1, GL_TRUE, mat_model)
     
     # draws each house face with a texture
@@ -54,7 +54,7 @@ def draw_tree2(loc_model, loc_color, size):
     # scale
     s_x = 7.0; s_y = 7.0; s_z = 7.0
     
-    mat_model = model(angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
+    mat_model = get_mat_model(angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
     glUniformMatrix4fv(loc_model, 1, GL_TRUE, mat_model)
 
     ### desenho o wood log
@@ -79,7 +79,7 @@ def draws_mario(loc_model, loc_color, size):
     # scale
     s_x = 0.1; s_y = 0.1; s_z = 0.1
     
-    mat_model = model(angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
+    mat_model = get_mat_model(angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
     glUniformMatrix4fv(loc_model, 1, GL_TRUE, mat_model)
        
     glUniform4f(loc_color, 0.4, 0.2, 0, 1.0)
