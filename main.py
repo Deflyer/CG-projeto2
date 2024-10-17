@@ -15,7 +15,7 @@ glEnable( GL_BLEND )
 glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA )
 glEnable(GL_LINE_SMOOTH)
 glEnable(GL_TEXTURE_2D)
-qtt_textures = 4
+qtt_textures = 50
 textures = glGenTextures(qtt_textures)
 
 # Getting all the vertexes and textures used in our project.
@@ -23,21 +23,21 @@ index_vertexes = {}
 textures_coord_list = []
 start = 0
 
-# Creating the tree2.
-tree2, coords_tree2, textures_tree2 = get_vertexes_tree2()
+# Creating the shrek.
+shrek, coords_shrek, textures_shrek = get_vertexes_shrek()
 print(start)
-index_vertexes['tree2'] = [start]
+index_vertexes['shrek'] = [start]
 # We use a different method to read from an obj file, so different save
-for value in coords_tree2:
-    index_vertexes['tree2'].append(start + value)
-start = len(tree2) + start
+for value in coords_shrek:
+    index_vertexes['shrek'].append(start + value)
+start = len(shrek) + start
 
-# Creating the dragon.
-dragon, coords_dragon, textures_dragon = get_vertexes_dragon()
-index_vertexes['dragon'] = [start]
-for value in coords_dragon:
-    index_vertexes['dragon'].append(index_vertexes['dragon'][-1] + value)
-start = len(dragon) + start
+# Creating the bathroom.
+bathroom, coords_bathroom, textures_bathroom = get_vertexes_bathroom()
+index_vertexes['bathroom'] = [start]
+for value in coords_bathroom:
+    index_vertexes['bathroom'].append(index_vertexes['bathroom'][-1] + value)
+start = len(bathroom) + start
 
 # Creating the house.
 house, coords_house, textures_house = get_vertexes_house()
@@ -46,20 +46,21 @@ for value in coords_house:
     index_vertexes['house'].append(index_vertexes['house'][-1] + value)
 start = len(house) + start
 
-# Creating the mario.
-mario, coords_mario = get_vertexes_mario()
-index_vertexes['mario'] = [start]
-for value in coords_mario:
-    index_vertexes['mario'].append(index_vertexes['mario'][-1] + value)
-start = len(mario) + start
+# Creating the sky.
+sky, coords_sky, textures_sky = get_vertexes_sky()
+index_vertexes['sky'] = [start]
+for value in coords_sky:
+    index_vertexes['sky'].append(index_vertexes['sky'][-1] + value)
+start = len(sky) + start
 
 # Joining everyone
-vertexes_temp = np.concatenate((tree2, dragon))
+vertexes_temp = np.concatenate((shrek, bathroom))
 vertexes_temp = np.concatenate((vertexes_temp, house))
+vertexes_temp = np.concatenate((vertexes_temp, sky))
 vertexes = np.zeros(len(vertexes_temp), [("position", np.float32, 3)])
 vertexes['position'] = vertexes_temp
 
-textures_temp = textures_tree2 + textures_dragon + textures_house
+textures_temp = textures_shrek + textures_bathroom + textures_house + textures_sky
 textures = np.zeros(len(textures_temp), [("position", np.float32, 2)])
 textures['position'] = textures_temp
 
@@ -102,9 +103,10 @@ while not glfw.window_should_close(window):
     glClearColor(1.0, 1.0, 1.0, 1.0)
 
     # Drawing the objects.
-    draw_dragon(loc_model, loc_color,index_vertexes)
+    draw_bathroom(loc_model, loc_color,index_vertexes)
     draw_house(loc_model, loc_color, index_vertexes)
-    draw_tree2(loc_model, loc_color,index_vertexes)
+    draw_shrek(loc_model, loc_color,index_vertexes)
+    draw_sky(loc_model, loc_color,index_vertexes)
 
     mat_view, loc_view = get_view(program)
     glUniformMatrix4fv(loc_view, 1, GL_TRUE, mat_view)

@@ -84,7 +84,7 @@ def get_vertexes_house():
     size = []
     textures_coord_list = []
 
-    modelo = load_model_from_file('objects/casa/casa.obj')
+    modelo = load_model_from_file('objects/casa/house.obj')
 
     # Allow for more the one texture.
     faces_visited = []
@@ -97,21 +97,21 @@ def get_vertexes_house():
         for texture_id in face[1]:
             textures_coord_list.append( modelo['texture'][texture_id-1] )
 
-    load_texture_from_file(2,'objects/casa/grama.jpg')
+    load_texture_from_file(2,'objects/casa/Farmhouse Texture.jpg')
     size.append(len(vertexes))
     print(size)
     return vertexes, size, textures_coord_list
 
-def get_vertexes_dragon():
+def get_vertexes_bathroom():
     '''
-    Responsible for loading the dragon vertexes and textures.
+    Responsible for loading the bathroom vertexes and textures.
     '''
 
     vertexes = []
     size = []
     textures_coord_list = []
 
-    modelo = load_model_from_file('objects/dragao.obj')
+    modelo = load_model_from_file('objects/bathroom/bathroom.obj')
 
     # Allows only one texture.
     for face in modelo['faces']:
@@ -121,9 +121,32 @@ def get_vertexes_dragon():
 
     size.append(len(vertexes))
     print(size)
+    load_texture_from_file(3,'objects/bathroom/diffuse.png')
     return vertexes, size, textures_coord_list
 
-def get_vertexes_tree2():
+def get_vertexes_sky():
+    '''
+    Responsible for loading the sky vertexes and textures.
+    '''
+
+    vertexes = []
+    size = []
+    textures_coord_list = []
+
+    modelo = load_model_from_file('objects/sky/sky.obj')
+
+    # Allows only one texture.
+    for face in modelo['faces']:
+        for vertice_id in face[0]: vertexes.append( modelo['vertices'][vertice_id-1] )
+        for texture_id in face[1]:
+            textures_coord_list.append( modelo['texture'][texture_id-1] )
+
+    size.append(len(vertexes))
+    print(size)
+    load_texture_from_file(4,'objects/sky/ceu.jpg')
+    return vertexes, size, textures_coord_list
+
+def get_vertexes_shrek():
     '''
     Responsible for loading the tree vertexes and textures.
     '''
@@ -132,7 +155,7 @@ def get_vertexes_tree2():
     size = []
     textures_coord_list = []
     
-    modelo = load_model_from_file('objects/arvore/arvore10.obj')
+    modelo = load_model_from_file('objects/jureg/jureg.obj')
 
     # Allows more then one textures.
     faces_visited = []
@@ -148,26 +171,8 @@ def get_vertexes_tree2():
     size.append(len(vertexes))
 
     # Loading textures, each with it's own id.
-    load_texture_from_file(0,'objects/arvore/bark_0021.jpg')
-    load_texture_from_file(1,'objects/arvore/DB2X2_L01.png')
+    load_texture_from_file(0,'objects/jureg/jureg.jpg')
+    load_texture_from_file(1,'objects/jureg/leather.jpg')
     print(size)
 
     return vertexes, size[1:], textures_coord_list
-
-def get_vertexes_mario():
-    '''
-    Responsible for loading the mario vertexes and textures.
-    '''
-    
-    vertexes = []
-    size = []
-    
-    modelo = load_model_from_file('objects/mario-model.obj')
-
-    # No textures for this one.
-    for face in modelo['faces']:
-        for vertice_id in face[0]: vertexes.append( modelo['vertices'][vertice_id-1] )
-
-    size.append(len(vertexes))
-
-    return vertexes, size
