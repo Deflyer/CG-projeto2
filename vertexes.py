@@ -97,9 +97,8 @@ def get_vertexes_house():
         for texture_id in face[1]:
             textures_coord_list.append( modelo['texture'][texture_id-1] )
 
-    load_texture_from_file(2,'objects/casa/Farmhouse Texture.jpg')
+    load_texture_from_file(2,'objects/casa/house.jpg')
     size.append(len(vertexes))
-    print(size)
     return vertexes, size, textures_coord_list
 
 def get_vertexes_bathroom():
@@ -120,7 +119,6 @@ def get_vertexes_bathroom():
             textures_coord_list.append( modelo['texture'][texture_id-1] )
 
     size.append(len(vertexes))
-    print(size)
     load_texture_from_file(3,'objects/bathroom/diffuse.png')
     return vertexes, size, textures_coord_list
 
@@ -142,8 +140,30 @@ def get_vertexes_sky():
             textures_coord_list.append( modelo['texture'][texture_id-1] )
 
     size.append(len(vertexes))
-    print(size)
+    
     load_texture_from_file(4,'objects/sky/ceu.jpg')
+    return vertexes, size, textures_coord_list
+
+def get_vertexes_ground():
+    '''
+    Responsible for loading the ground vertexes and textures.
+    '''
+
+    vertexes = []
+    size = []
+    textures_coord_list = []
+
+    modelo = load_model_from_file('uploads_files_3767931_Swamp/Swamp/Swamp.obj')
+
+    # Allows only one texture.
+    for face in modelo['faces']:
+        for vertice_id in face[0]: vertexes.append( modelo['vertices'][vertice_id-1] )
+        for texture_id in face[1]:
+            textures_coord_list.append( modelo['texture'][texture_id-1] )
+
+    size.append(len(vertexes))
+    
+    load_texture_from_file(5,'objects/terrain/chao.jpg')
     return vertexes, size, textures_coord_list
 
 def get_vertexes_shrek():

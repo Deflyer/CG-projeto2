@@ -53,14 +53,22 @@ for value in coords_sky:
     index_vertexes['sky'].append(index_vertexes['sky'][-1] + value)
 start = len(sky) + start
 
+# Creating the ground.
+ground, coords_ground, textures_ground = get_vertexes_ground()
+index_vertexes['ground'] = [start]
+for value in coords_ground:
+    index_vertexes['ground'].append(index_vertexes['ground'][-1] + value)
+start = len(ground) + start
+
 # Joining everyone
 vertexes_temp = np.concatenate((shrek, bathroom))
 vertexes_temp = np.concatenate((vertexes_temp, house))
 vertexes_temp = np.concatenate((vertexes_temp, sky))
+vertexes_temp = np.concatenate((vertexes_temp, ground))
 vertexes = np.zeros(len(vertexes_temp), [("position", np.float32, 3)])
 vertexes['position'] = vertexes_temp
 
-textures_temp = textures_shrek + textures_bathroom + textures_house + textures_sky
+textures_temp = textures_shrek + textures_bathroom + textures_house + textures_sky + textures_ground
 textures = np.zeros(len(textures_temp), [("position", np.float32, 2)])
 textures['position'] = textures_temp
 
@@ -107,6 +115,7 @@ while not glfw.window_should_close(window):
     draw_house(loc_model, loc_color, index_vertexes)
     draw_shrek(loc_model, loc_color,index_vertexes)
     draw_sky(loc_model, loc_color,index_vertexes)
+    draw_ground(loc_model, loc_color,index_vertexes)
 
     mat_view, loc_view = get_view(program)
     glUniformMatrix4fv(loc_view, 1, GL_TRUE, mat_view)

@@ -28,7 +28,7 @@ def draw_sky(loc_model, loc_color, size):
     r_x = 0.0; r_y = 0.0; r_z = 1.0
     
     # translade
-    t_x = 0.0; t_y = -20.0; t_z = 0.0
+    t_x = 0.0; t_y = -35; t_z = 0.0
     
     # scale
     s_x = 1; s_y = 1; s_z = 1
@@ -39,6 +39,24 @@ def draw_sky(loc_model, loc_color, size):
     # draws the sky
     glBindTexture(GL_TEXTURE_2D, 4)
     glDrawArrays(GL_TRIANGLES, size['sky'][0], size['sky'][1] - size['sky'][0]) ## renderizando
+
+def draw_ground(loc_model, loc_color, size):    
+    # rotate
+    angle = 0.0
+    r_x = 0.0; r_y = 0.0; r_z = 1.0
+    
+    # translade
+    t_x = 0.0; t_y = -0.5; t_z = 0.0
+    
+    # scale
+    s_x = 1; s_y = 1; s_z = 1
+    
+    mat_model = get_mat_model(angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
+    glUniformMatrix4fv(loc_model, 1, GL_TRUE, mat_model)
+       
+    # draws the ground
+    glBindTexture(GL_TEXTURE_2D, 5)
+    glDrawArrays(GL_TRIANGLES, size['ground'][0], size['ground'][1] - size['ground'][0])
 
 def draw_house(loc_model, loc_color, size):    
     # rotate
@@ -54,11 +72,9 @@ def draw_house(loc_model, loc_color, size):
     mat_model = get_mat_model(angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
     glUniformMatrix4fv(loc_model, 1, GL_TRUE, mat_model)
     
-    # draws each house face with a texture
-    text = [0,6,2]
-    print(len(size['house']))
+    # draws each house face with a texture  
     for i in range(len(size['house']) - 1):
-        glBindTexture(GL_TEXTURE_2D, text[i])
+        glBindTexture(GL_TEXTURE_2D, 2)
         glDrawArrays(GL_TRIANGLES, size['house'][i], size['house'][i +1] - size['house'][i]) ## renderizando
         
 
@@ -69,10 +85,10 @@ def draw_shrek(loc_model, loc_color, size):
     r_x = 0.0; r_y = 0.0; r_z = 1.0
     
     # translade
-    t_x = -10.0; t_y = -1.0; t_z = 7.0
+    t_x = -10.0; t_y = -0.5; t_z = 7.0
     
     # scale
-    s_x = 12.0; s_y = 12.0; s_z = 12.0
+    s_x = 6; s_y = 6; s_z = 6
     
     mat_model = get_mat_model(angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
     glUniformMatrix4fv(loc_model, 1, GL_TRUE, mat_model)
