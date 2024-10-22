@@ -22,6 +22,24 @@ def draw_bathroom(loc_model, loc_color, size):
     glBindTexture(GL_TEXTURE_2D, 3)
     glDrawArrays(GL_TRIANGLES, size['bathroom'][0], size['bathroom'][1] - size['bathroom'][0]) ## renderizando
 
+def draw_drawer(loc_model, loc_color, size):    
+    # rotate
+    angle = 0.0
+    r_x = 0.0; r_y = 0.0; r_z = 1.0
+    
+    # translade
+    t_x = 3.0; t_y = -1.0; t_z = -22.25
+    
+    # scale
+    s_x = 0.75; s_y = 0.75; s_z = 0.75
+    
+    mat_model = get_mat_model(angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
+    glUniformMatrix4fv(loc_model, 1, GL_TRUE, mat_model)
+
+    # draws the drawer
+    glBindTexture(GL_TEXTURE_2D, 5)
+    glDrawArrays(GL_TRIANGLES, size['drawer'][0], size['drawer'][1] - size['drawer'][0]) ## renderizando
+
 def draw_sky(loc_model, loc_color, size):    
     # rotate
     angle = 0.0
@@ -85,7 +103,7 @@ def draw_shrek(loc_model, loc_color, size):
     r_x = 0.0; r_y = 0.0; r_z = 1.0
     
     # translade
-    t_x = -10.0; t_y = -0.5; t_z = 7.0
+    t_x = 0.0; t_y = 0.0; t_z = 0.0
     
     # scale
     s_x = 6; s_y = 6; s_z = 6
