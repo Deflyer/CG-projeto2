@@ -76,6 +76,24 @@ def draw_rose(loc_model, loc_color, size):
     glBindTexture(GL_TEXTURE_2D, 7)
     glDrawArrays(GL_TRIANGLES, size['rose'][0], size['rose'][1] - size['rose'][0]) ## renderizando
 
+def draw_bed(loc_model, loc_color, size):
+    # rotate
+    angle = 180.0
+    r_x = 0.0; r_y = 1; r_z = 0.0
+    
+    # translade
+    t_x = -2.7; t_y = -1.0; t_z = -10.0
+    
+    # scale
+    s_x = 0.035; s_y = 0.035; s_z = 0.035
+    
+    mat_model = get_mat_model(angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
+    glUniformMatrix4fv(loc_model, 1, GL_TRUE, mat_model)
+
+    # draws the vase
+    glBindTexture(GL_TEXTURE_2D, 8)
+    glDrawArrays(GL_TRIANGLES, size['bed'][0], size['bed'][1] - size['bed'][0]) ## renderizando
+
 def draw_sky(loc_model, loc_color, size):    
     # rotate
     angle = 0.0

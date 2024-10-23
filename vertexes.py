@@ -156,6 +156,23 @@ def get_textures_rose():
     load_texture_from_file(7,'objects/rose/rose_texture.jpg')
     return vertexes, size, textures_coord_list
 
+def get_textures_bed():
+    vertexes = []
+    size = []
+    textures_coord_list = []
+
+    modelo = load_model_from_file('objects/bed/bed.obj')
+
+    # Allows only one texture.
+    for face in modelo['faces']:
+        for vertice_id in face[0]: vertexes.append( modelo['vertices'][vertice_id-1] )
+        for texture_id in face[1]:
+            textures_coord_list.append( modelo['texture'][texture_id-1] )
+
+    size.append(len(vertexes))
+    load_texture_from_file(8,'objects/bed/bed_texture.png')
+    return vertexes, size, textures_coord_list
+
 def get_vertexes_bathroom():
     '''
     Responsible for loading the bathroom vertexes and textures.

@@ -81,6 +81,13 @@ for value in coords_rose:
     index_vertexes['rose'].append(index_vertexes['rose'][-1] + value)
 start = len(rose) + start
 
+# Creating the bed.
+bed, coords_bed, textures_bed = get_textures_bed()
+index_vertexes['bed'] = [start]
+for value in coords_bed:
+    index_vertexes['bed'].append(index_vertexes['bed'][-1] + value)
+start = len(bed) + start
+
 # Joining everyone
 vertexes_temp = np.concatenate((shrek, bathroom))
 vertexes_temp = np.concatenate((vertexes_temp, house))
@@ -89,11 +96,12 @@ vertexes_temp = np.concatenate((vertexes_temp, sky))
 vertexes_temp = np.concatenate((vertexes_temp, drawer))
 vertexes_temp = np.concatenate((vertexes_temp, vase))
 vertexes_temp = np.concatenate((vertexes_temp, rose))
+vertexes_temp = np.concatenate((vertexes_temp, bed))
 
 vertexes = np.zeros(len(vertexes_temp), [("position", np.float32, 3)])
 vertexes['position'] = vertexes_temp
 
-textures_temp = textures_shrek + textures_bathroom + textures_house + textures_sky + textures_drawer + textures_vase + textures_rose #+ textures_ground
+textures_temp = textures_shrek + textures_bathroom + textures_house + textures_sky + textures_drawer + textures_vase + textures_rose + textures_bed #+ textures_ground
 textures = np.zeros(len(textures_temp), [("position", np.float32, 2)])
 textures['position'] = textures_temp
 
@@ -143,6 +151,7 @@ while not glfw.window_should_close(window):
     draw_drawer(loc_model, loc_color, index_vertexes)
     draw_vase(loc_model, loc_color, index_vertexes)
     draw_rose(loc_model, loc_color, index_vertexes)
+    draw_bed(loc_model, loc_color, index_vertexes)
     # draw_ground(loc_model, loc_color,index_vertexes)
 
     mat_view, loc_view = get_view(program)
