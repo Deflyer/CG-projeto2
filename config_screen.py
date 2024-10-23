@@ -6,8 +6,8 @@ import glm
 import numpy as np
 import keyboard as kb
 
-HEIGHT = 1600
-WIDTH = 1200
+HEIGHT = 1080
+WIDTH = 1920
 WINDOW_NAME = 'Project 2'
 QTT_TEXTURES = 4
 
