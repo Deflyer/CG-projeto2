@@ -122,6 +122,40 @@ def get_vertexes_drawer():
     load_texture_from_file(5,'objects/drawer/drawer_texture.png')
     return vertexes, size, textures_coord_list
 
+def get_textures_vase():
+    vertexes = []
+    size = []
+    textures_coord_list = []
+
+    modelo = load_model_from_file('objects/vase/vase.obj')
+
+    # Allows only one texture.
+    for face in modelo['faces']:
+        for vertice_id in face[0]: vertexes.append( modelo['vertices'][vertice_id-1] )
+        for texture_id in face[1]:
+            textures_coord_list.append( modelo['texture'][texture_id-1] )
+
+    size.append(len(vertexes))
+    load_texture_from_file(6,'objects/vase/vase_texture.png')
+    return vertexes, size, textures_coord_list
+
+def get_textures_rose():
+    vertexes = []
+    size = []
+    textures_coord_list = []
+
+    modelo = load_model_from_file('objects/rose/rose.obj')
+
+    # Allows only one texture.
+    for face in modelo['faces']:
+        for vertice_id in face[0]: vertexes.append( modelo['vertices'][vertice_id-1] )
+        for texture_id in face[1]:
+            textures_coord_list.append( modelo['texture'][texture_id-1] )
+
+    size.append(len(vertexes))
+    load_texture_from_file(7,'objects/rose/rose_texture.jpg')
+    return vertexes, size, textures_coord_list
+
 def get_vertexes_bathroom():
     '''
     Responsible for loading the bathroom vertexes and textures.

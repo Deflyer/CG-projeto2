@@ -28,7 +28,7 @@ def draw_drawer(loc_model, loc_color, size):
     r_x = 0.0; r_y = 0.0; r_z = 1.0
     
     # translade
-    t_x = 3.0; t_y = -1.0; t_z = -22.25
+    t_x = 3.0; t_y = -0.95; t_z = -22.25
     
     # scale
     s_x = 0.75; s_y = 0.75; s_z = 0.75
@@ -39,6 +39,42 @@ def draw_drawer(loc_model, loc_color, size):
     # draws the drawer
     glBindTexture(GL_TEXTURE_2D, 5)
     glDrawArrays(GL_TRIANGLES, size['drawer'][0], size['drawer'][1] - size['drawer'][0]) ## renderizando
+
+def draw_vase(loc_model, loc_color, size):
+    # rotate
+    angle = 0.0
+    r_x = 0.0; r_y = 0.0; r_z = 1.0
+    
+    # translade
+    t_x = -2.7; t_y = -0.8; t_z = -22.5
+    
+    # scale
+    s_x = 0.005; s_y = 0.005; s_z = 0.005
+    
+    mat_model = get_mat_model(angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
+    glUniformMatrix4fv(loc_model, 1, GL_TRUE, mat_model)
+
+    # draws the vase
+    glBindTexture(GL_TEXTURE_2D, 6)
+    glDrawArrays(GL_TRIANGLES, size['vase'][0], size['vase'][1] - size['vase'][0]) ## renderizando
+
+def draw_rose(loc_model, loc_color, size):
+    # rotate
+    angle = 0.0
+    r_x = 0.0; r_y = 0.0; r_z = 1.0
+    
+    # translade
+    t_x = -2.7; t_y = -0.8; t_z = -22.5
+    
+    # scale
+    s_x = 0.05; s_y = 0.05; s_z = 0.05
+    
+    mat_model = get_mat_model(angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
+    glUniformMatrix4fv(loc_model, 1, GL_TRUE, mat_model)
+
+    # draws the vase
+    glBindTexture(GL_TEXTURE_2D, 7)
+    glDrawArrays(GL_TRIANGLES, size['rose'][0], size['rose'][1] - size['rose'][0]) ## renderizando
 
 def draw_sky(loc_model, loc_color, size):    
     # rotate
