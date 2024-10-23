@@ -115,20 +115,20 @@ def draw_sky(loc_model, loc_color, size):
 def draw_ground(loc_model, loc_color, size):    
     # rotate
     angle = 0.0
-    r_x = 0.0; r_y = 0.0; r_z = 1.0
+    r_x = 0.0; r_y = 0.0; r_z = 0.0
     
     # translade
-    t_x = 0.0; t_y = -0.5; t_z = 0.0
+    t_x = 0.0; t_y = -1.0; t_z = 0.0
     
     # scale
-    s_x = 1; s_y = 1; s_z = 1
+    s_x = 60; s_y = 60; s_z = 60
     
     mat_model = get_mat_model(angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
     glUniformMatrix4fv(loc_model, 1, GL_TRUE, mat_model)
-       
+    
     # draws the ground
-    glBindTexture(GL_TEXTURE_2D, 5)
-    glDrawArrays(GL_TRIANGLES, size['ground'][0], size['ground'][1] - size['ground'][0])
+    glBindTexture(GL_TEXTURE_2D, 9)
+    glDrawArrays(GL_TRIANGLE_STRIP, size['ground'][0], size['ground'][1] - size['ground'][0])
 
 def draw_house(loc_model, loc_color, size):    
     # rotate
@@ -147,8 +147,7 @@ def draw_house(loc_model, loc_color, size):
     # draws each house face with a texture  
     for i in range(len(size['house']) - 1):
         glBindTexture(GL_TEXTURE_2D, 2)
-        glDrawArrays(GL_TRIANGLES, size['house'][i], size['house'][i +1] - size['house'][i]) ## renderizando
-        
+        glDrawArrays(GL_TRIANGLES, size['house'][i], size['house'][i +1] - size['house'][i]) ## renderizandoS 
 
 def draw_shrek(loc_model, loc_color, size):
     # rotate
