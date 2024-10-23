@@ -26,7 +26,7 @@ def key_event(window,key,scancode,action,mods):
     global cameraFront
     global cameraUp
 
-    cameraSpeed = 0.2
+    cameraSpeed = 0.4
     
     if key == 87 and (action==1 or action==2): # tecla W
         cameraPos += cameraSpeed * cameraFront
@@ -55,7 +55,7 @@ def mouse_event(window, xpos, ypos):
     lastX = xpos
     lastY = ypos
 
-    sensitivity = 0.3 
+    sensitivity = 0.5
     xoffset *= sensitivity
     yoffset *= sensitivity
 
