@@ -6,14 +6,14 @@ import keyboard as kb
 
 def draw_bathroom(loc_model, loc_color, size):    
     # rotate
-    angle = 0.0
-    r_x = 0.0; r_y = 0.0; r_z = 1.0
+    angle = 200
+    r_x = 0.0; r_y = 1; r_z = 0
     
     # translade
-    t_x = 15.0; t_y = 10.0; t_z = -20.0
+    t_x = 20.0; t_y = 2.2; t_z = -6.0
     
     # scale
-    s_x = 0.005; s_y = 0.005; s_z = 0.005
+    s_x = 0.003; s_y = 0.003; s_z = 0.003
     
     mat_model = get_mat_model(angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
     glUniformMatrix4fv(loc_model, 1, GL_TRUE, mat_model)
@@ -24,11 +24,11 @@ def draw_bathroom(loc_model, loc_color, size):
 
 def draw_drawer(loc_model, loc_color, size):    
     # rotate
-    angle = 0.0
-    r_x = 0.0; r_y = 0.0; r_z = 1.0
+    angle = 90.0
+    r_x = 0.0; r_y = 1.0; r_z = 0.0
     
     # translade
-    t_x = 3.0; t_y = -0.95; t_z = -22.25
+    t_x = -3.1; t_y = -0.95; t_z = -8.5
     
     # scale
     s_x = 0.75; s_y = 0.75; s_z = 0.75
@@ -46,7 +46,7 @@ def draw_vase(loc_model, loc_color, size):
     r_x = 0.0; r_y = 0.0; r_z = 1.0
     
     # translade
-    t_x = -2.7; t_y = -0.8; t_z = -22.5
+    t_x = -3.9; t_y = -0.8; t_z = -14.5
     
     # scale
     s_x = 0.005; s_y = 0.005; s_z = 0.005
@@ -64,7 +64,7 @@ def draw_rose(loc_model, loc_color, size):
     r_x = 0.0; r_y = 0.0; r_z = 1.0
     
     # translade
-    t_x = -2.7; t_y = -0.8; t_z = -22.5
+    t_x = -3.9; t_y = -0.8; t_z = -14.5
     
     # scale
     s_x = 0.05; s_y = 0.05; s_z = 0.05
@@ -78,11 +78,11 @@ def draw_rose(loc_model, loc_color, size):
 
 def draw_bed(loc_model, loc_color, size):
     # rotate
-    angle = 180.0
+    angle = 0.0
     r_x = 0.0; r_y = 1; r_z = 0.0
     
     # translade
-    t_x = -2.7; t_y = -1.0; t_z = -10.0
+    t_x = 2.7; t_y = -1.0; t_z = -20.0
     
     # scale
     s_x = 0.035; s_y = 0.035; s_z = 0.035
@@ -100,7 +100,7 @@ def draw_sky(loc_model, loc_color, size):
     r_x = 0.0; r_y = 0.0; r_z = 1.0
     
     # translade
-    t_x = 0.0; t_y = -35; t_z = 0.0
+    t_x = 0.0; t_y = -45; t_z = 0.0
     
     # scale
     s_x = 1; s_y = 1; s_z = 1
@@ -130,13 +130,31 @@ def draw_ground(loc_model, loc_color, size):
     glBindTexture(GL_TEXTURE_2D, 9)
     glDrawArrays(GL_TRIANGLE_STRIP, size['ground'][0], size['ground'][1] - size['ground'][0])
 
-def draw_house(loc_model, loc_color, size):    
+def draw_plant(loc_model, loc_color, size):
     # rotate
-    angle = 0.0
+    angle = 0
     r_x = 0.0; r_y = 0.0; r_z = 1.0
     
     # translade
-    t_x = 0.0; t_y = -1.0; t_z = -20.0
+    t_x = 0; t_y = 0; t_z = 0 
+    
+    # scale
+    s_x = 0.1; s_y = 0.1; s_z = 0.1
+    
+    mat_model = get_mat_model(angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
+    glUniformMatrix4fv(loc_model, 1, GL_TRUE, mat_model)
+
+    # draws the vase
+    glBindTexture(GL_TEXTURE_2D, 10)
+    glDrawArrays(GL_TRIANGLES, size['plant'][0], size['plant'][1] - size['plant'][0]) ## renderizando
+
+def draw_house(loc_model, loc_color, size):    
+    # rotate
+    angle = 180
+    r_x = 0.0; r_y = 1.0; r_z = 0
+    
+    # translade
+    t_x = 0.0; t_y = -1.0; t_z = -10.0
     
     # scale
     s_x = 0.5; s_y = 0.5; s_z = 0.5
@@ -144,22 +162,83 @@ def draw_house(loc_model, loc_color, size):
     mat_model = get_mat_model(angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
     glUniformMatrix4fv(loc_model, 1, GL_TRUE, mat_model)
     
-    # draws each house face with a texture  
+    # draws each house face with a texture 
+    print(len(size['house']))
     for i in range(len(size['house']) - 1):
         glBindTexture(GL_TEXTURE_2D, 2)
         glDrawArrays(GL_TRIANGLES, size['house'][i], size['house'][i +1] - size['house'][i]) ## renderizandoS 
 
+def draw_plant1(loc_model, loc_color, size):    
+    # rotate
+    angle = 180
+    r_x = 0.0; r_y = 1.0; r_z = 0
+    
+    # translade
+    t_x = 0.0; t_y = -1.0; t_z = 5.0
+    
+    # scale
+    s_x = 0.5; s_y = 0.5; s_z = 0.5
+    
+    mat_model = get_mat_model(angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
+    glUniformMatrix4fv(loc_model, 1, GL_TRUE, mat_model)
+    
+    # draws each plant1 face with a texture 
+    print(len(size['plant1']))
+    for i in range(len(size['plant1']) - 1):
+        glBindTexture(GL_TEXTURE_2D,11)
+        glDrawArrays(GL_TRIANGLES, size['plant1'][i], size['plant1'][i +1] - size['plant1'][i])
+
+def draw_plant2(loc_model, loc_color, size):    
+    # rotate
+    angle = 180
+    r_x = 0.0; r_y = 1.0; r_z = 0
+    
+    # translade
+    t_x = 0.0; t_y = -1.0; t_z = 0.0
+    
+    # scale
+    s_x = 0.02; s_y = 0.02; s_z = 0.02
+    
+    mat_model = get_mat_model(angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
+    glUniformMatrix4fv(loc_model, 1, GL_TRUE, mat_model)
+    
+    # draws each plant2 face with a texture 
+    print(len(size['plant2']))
+    for i in range(len(size['plant2']) - 1):
+        glBindTexture(GL_TEXTURE_2D, 12)
+        glDrawArrays(GL_TRIANGLES, size['plant2'][i], size['plant2'][i +1] - size['plant2'][i])
+
+def draw_dino(loc_model, loc_color, size):    
+    # rotate
+    angle = 180
+    r_x = 0.0; r_y = 1.0; r_z = 0
+    
+    # translade
+    t_x = 0.0; t_y = -1.0; t_z = 0.0
+    
+    # scale
+    s_x = 0.02; s_y = 0.02; s_z = 0.02
+    
+    mat_model = get_mat_model(angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
+    glUniformMatrix4fv(loc_model, 1, GL_TRUE, mat_model)
+    
+    # draws each dino face with a texture 
+    print(len(size['dino']))
+    for i in range(len(size['dino']) - 1):
+        glBindTexture(GL_TEXTURE_2D, 13)
+        glDrawArrays(GL_TRIANGLES, size['dino'][i], size['dino'][i +1] - size['dino'][i])
+
 def draw_shrek(loc_model, loc_color, size):
     # rotate
     
-    angle = 0.0
-    r_x = 0.0; r_y = 0.0; r_z = 1.0
+    angle = 180.0
+    r_x = 0.0; r_y = 1.0; r_z = 0.0
     
     # translade
-    t_x = 0.0; t_y = 0.0; t_z = 0.0
+    t_x = 0.0; t_y = -1.0; t_z = 2.0
     
     # scale
-    s_x = 6; s_y = 6; s_z = 6
+    s_x = 2.8; s_y = 2.8; s_z = 2.8
     
     mat_model = get_mat_model(angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
     glUniformMatrix4fv(loc_model, 1, GL_TRUE, mat_model)

@@ -233,26 +233,83 @@ def get_vertexes_sky():
     load_texture_from_file(4,'objects/sky/ceu.jpg')
     return vertexes, size, textures_coord_list
 
-def get_vertexes_ground():
-    '''
-    Responsible for loading the ground vertexes and textures.
-    '''
 
+def get_vertexes_plant1():
+    '''
+    Responsible for loading the plant1 vertexes and textures.    
+    '''
+    
     vertexes = []
     size = []
     textures_coord_list = []
 
-    modelo = load_model_from_file('uploads_files_3767931_Swamp/Swamp/Swamp.obj')
+    modelo = load_model_from_file('objects/plant/plant1.obj')
 
-    # Allows only one texture.
+    # Allow for more the one texture.
+    faces_visited = []
     for face in modelo['faces']:
-        for vertice_id in face[0]: vertexes.append( modelo['vertices'][vertice_id-1] )
+        if face[2] not in faces_visited:
+            size.append(len(vertexes))
+            faces_visited.append(face[2])
+        for vertice_id in face[0]:
+            vertexes.append( modelo['vertices'][vertice_id-1] )
         for texture_id in face[1]:
             textures_coord_list.append( modelo['texture'][texture_id-1] )
 
+    load_texture_from_file(11,'objects/plant/plant1.png')
     size.append(len(vertexes))
+    return vertexes, size, textures_coord_list
+
+def get_vertexes_plant2():
+    '''
+    Responsible for loading the plant2 vertexes and textures.    
+    '''
     
-    load_texture_from_file(5,'objects/terrain/chao.jpg')
+    vertexes = []
+    size = []
+    textures_coord_list = []
+
+    modelo = load_model_from_file('objects/plant/grama2.obj')
+
+    # Allow for more the one texture.
+    faces_visited = []
+    for face in modelo['faces']:
+        if face[2] not in faces_visited:
+            size.append(len(vertexes))
+            faces_visited.append(face[2])
+        for vertice_id in face[0]:
+            vertexes.append( modelo['vertices'][vertice_id-1] )
+        for texture_id in face[1]:
+            textures_coord_list.append( modelo['texture'][texture_id-1] )
+
+    load_texture_from_file(12,'objects/plant/plant2.png')
+    size.append(len(vertexes))
+    return vertexes, size, textures_coord_list
+
+def get_vertexes_dino():
+    '''
+    Responsible for loading the dino vertexes and textures.    
+    '''
+    
+    vertexes = []
+    size = []
+    textures_coord_list = []
+
+    modelo = load_model_from_file('objects/dinosaur/dinosaur.obj')
+
+    # Allow for more the one texture.
+    faces_visited = []
+    for face in modelo['faces']:
+        if face[2] not in faces_visited:
+            size.append(len(vertexes))
+            faces_visited.append(face[2])
+        for vertice_id in face[0]:
+            vertexes.append( modelo['vertices'][vertice_id-1] )
+        for texture_id in face[1]:
+            textures_coord_list.append( modelo['texture'][texture_id-1] )
+
+    load_texture_from_file(13,'objects/dinosaur/dino.jpg')
+    size.append(len(vertexes))
     return vertexes, size, textures_coord_list
 
 def get_vertexes_shrek():

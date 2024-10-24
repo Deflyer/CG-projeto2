@@ -88,6 +88,27 @@ for value in coords_ground:
     index_vertexes['ground'].append(index_vertexes['ground'][-1] + value)
 start = len(ground) + start
 
+# Creating the plant1.
+plant1, coords_plant1, textures_plant1 = get_vertexes_plant1()
+index_vertexes['plant1'] = [start]
+for value in coords_plant1:
+    index_vertexes['plant1'].append(index_vertexes['plant1'][-1] + value)
+start = len(plant1) + start
+
+# Creating the plant2.
+plant2, coords_plant2, textures_plant2 = get_vertexes_plant2()
+index_vertexes['plant2'] = [start]
+for value in coords_plant2:
+    index_vertexes['plant2'].append(index_vertexes['plant2'][-1] + value)
+start = len(plant2) + start
+
+# Creating the dino.
+dino, coords_dino, textures_dino = get_vertexes_dino()
+index_vertexes['dino'] = [start]
+for value in coords_dino:
+    index_vertexes['dino'].append(index_vertexes['dino'][-1] + value)
+start = len(dino) + start
+
 # Joining everyone
 vertexes_temp = np.concatenate((shrek, bathroom))
 vertexes_temp = np.concatenate((vertexes_temp, house))
@@ -97,11 +118,15 @@ vertexes_temp = np.concatenate((vertexes_temp, vase))
 vertexes_temp = np.concatenate((vertexes_temp, rose))
 vertexes_temp = np.concatenate((vertexes_temp, bed))
 vertexes_temp = np.concatenate((vertexes_temp, ground))
+vertexes_temp = np.concatenate((vertexes_temp, plant1))
+vertexes_temp = np.concatenate((vertexes_temp, plant2))
+vertexes_temp = np.concatenate((vertexes_temp, dino))
+
 
 vertexes = np.zeros(len(vertexes_temp), [("position", np.float32, 3)])
 vertexes['position'] = vertexes_temp
 
-textures_temp = textures_shrek + textures_bathroom + textures_house + textures_sky + textures_drawer + textures_vase + textures_rose + textures_bed + textures_ground
+textures_temp = textures_shrek + textures_bathroom + textures_house + textures_sky + textures_drawer + textures_vase + textures_rose + textures_bed + textures_ground + textures_plant1 + textures_plant2 + textures_dino 
 textures = np.zeros(len(textures_temp), [("position", np.float32, 2)])
 textures['position'] = textures_temp
 
@@ -145,6 +170,9 @@ while not glfw.window_should_close(window):
 
     # Drawing the objects.
     draw_bathroom(loc_model, loc_color, index_vertexes)
+    draw_plant1(loc_model, loc_color,index_vertexes)
+    draw_plant2(loc_model, loc_color,index_vertexes)
+    draw_dino(loc_model, loc_color,index_vertexes)
     draw_house(loc_model, loc_color, index_vertexes)
     draw_shrek(loc_model, loc_color, index_vertexes)
     draw_sky(loc_model, loc_color, index_vertexes)
