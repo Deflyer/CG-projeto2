@@ -28,7 +28,7 @@ def draw_drawer(loc_model, loc_color, size):
     r_x = 0.0; r_y = 1.0; r_z = 0.0
     
     # translade
-    t_x = -3.1; t_y = -0.95; t_z = -8.5
+    t_x = 2.7; t_y = -0.95; t_z = -7.8
     
     # scale
     s_x = 0.75; s_y = 0.75; s_z = 0.75
@@ -46,7 +46,7 @@ def draw_vase(loc_model, loc_color, size):
     r_x = 0.0; r_y = 0.0; r_z = 1.0
     
     # translade
-    t_x = -3.9; t_y = -0.8; t_z = -14.5
+    t_x = -2.8; t_y = -0.8; t_z = -6.8
     
     # scale
     s_x = 0.005; s_y = 0.005; s_z = 0.005
@@ -64,7 +64,7 @@ def draw_rose(loc_model, loc_color, size):
     r_x = 0.0; r_y = 0.0; r_z = 1.0
     
     # translade
-    t_x = -3.9; t_y = -0.8; t_z = -14.5
+    t_x = -2.8; t_y = -0.8; t_z = -6.8
     
     # scale
     s_x = 0.05; s_y = 0.05; s_z = 0.05
