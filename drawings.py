@@ -253,3 +253,25 @@ def draw_shrek(loc_model, loc_color, size):
     glBindTexture(GL_TEXTURE_2D, 1)
 
     glDrawArrays(GL_TRIANGLES, size['shrek'][1], size['shrek'][2] - size['shrek'][1]) ## renderizando    
+
+def draw_bird(loc_model, loc_color, size):
+    # rotate
+    
+    angle = 110.0
+    r_x = 0.0; r_y = 1.0; r_z = 0.0
+    
+    # translade
+    t_x = kb.bird_radius * math.cos(kb.bird_angle); t_y = 50.0; t_z = kb.bird_radius * math.sin(kb.bird_angle)
+    print('~~~> ', t_x, t_y, t_z)
+    
+    # scale
+    s_x = 0.05; s_y = 0.05; s_z = 0.05
+    
+    mat_model = get_mat_model(angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
+    glUniformMatrix4fv(loc_model, 1, GL_TRUE, mat_model)
+    
+    # draws each bird face with a texture 
+    # print(len(size['bird']))
+    for i in range(len(size['bird']) - 1):
+        glBindTexture(GL_TEXTURE_2D, 14)
+        glDrawArrays(GL_TRIANGLES, size['bird'][i], size['bird'][i +1] - size['bird'][i])

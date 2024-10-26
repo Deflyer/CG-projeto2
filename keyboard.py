@@ -22,6 +22,9 @@ lastY =  700/2
 
 # Geometric transformations auxiliar variables.
 rose_scale_y = 0.05
+bird_speed = 0.01
+bird_radius = 80.0
+bird_angle = 0.0
 
 def key_event(window,key,scancode,action,mods):
     global polyMode
@@ -29,6 +32,7 @@ def key_event(window,key,scancode,action,mods):
     global cameraFront
     global cameraUp
     global rose_scale_y
+    global bird_speed
 
     cameraSpeed = 0.4
     
@@ -51,10 +55,13 @@ def key_event(window,key,scancode,action,mods):
         aux = rose_scale_y + 0.01
         rose_scale_y = min(aux, 0.13)
 
-    if key == 264 and action == glfw.PRESS: # tecla seta pra baixo (rosa diminui).
-        aux = rose_scale_y - 0.01
-        rose_scale_y = max(aux,0.05)
-        print('----> ', rose_scale_y)
+    if key == 262 and action == glfw.PRESS: # tecla seta pra direita.
+        aux = bird_speed + 0.01
+        bird_speed = min(aux, 0.05)
+
+    if key == 263 and action == glfw.PRESS: # tecla seta pra baixo.
+        aux = bird_speed - 0.01
+        bird_speed = max(aux, 0.0)
 
 def mouse_event(window, xpos, ypos):
     global firstMouse, cameraFront, yaw, pitch, lastX, lastY

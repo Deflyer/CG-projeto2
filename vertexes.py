@@ -286,16 +286,16 @@ def get_vertexes_plant2():
     size.append(len(vertexes))
     return vertexes, size, textures_coord_list
 
-def get_vertexes_dino():
+def get_vertexes_bird():
     '''
-    Responsible for loading the dino vertexes and textures.    
+    Responsible for loading the bird vertexes and textures.    
     '''
     
     vertexes = []
     size = []
     textures_coord_list = []
 
-    modelo = load_model_from_file('objects/dinosaur/dinosaur.obj')
+    modelo = load_model_from_file('objects/bird/bird.obj')
 
     # Allow for more the one texture.
     faces_visited = []
@@ -308,7 +308,7 @@ def get_vertexes_dino():
         for texture_id in face[1]:
             textures_coord_list.append( modelo['texture'][texture_id-1] )
 
-    load_texture_from_file(13,'objects/dinosaur/dino.jpg')
+    load_texture_from_file(14,'objects/bird/bird.jpg')
     size.append(len(vertexes))
     return vertexes, size, textures_coord_list
 

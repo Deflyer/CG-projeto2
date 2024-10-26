@@ -102,12 +102,12 @@ for value in coords_plant2:
     index_vertexes['plant2'].append(index_vertexes['plant2'][-1] + value)
 start = len(plant2) + start
 
-# Creating the dino.
-dino, coords_dino, textures_dino = get_vertexes_dino()
-index_vertexes['dino'] = [start]
-for value in coords_dino:
-    index_vertexes['dino'].append(index_vertexes['dino'][-1] + value)
-start = len(dino) + start
+# Creating the bird.
+bird, coords_bird, textures_bird = get_vertexes_bird()
+index_vertexes['bird'] = [start]
+for value in coords_bird:
+    index_vertexes['bird'].append(index_vertexes['bird'][-1] + value)
+start = len(bird) + start
 
 # Joining everyone
 vertexes_temp = np.concatenate((shrek, bathroom))
@@ -120,13 +120,13 @@ vertexes_temp = np.concatenate((vertexes_temp, bed))
 vertexes_temp = np.concatenate((vertexes_temp, ground))
 vertexes_temp = np.concatenate((vertexes_temp, plant1))
 vertexes_temp = np.concatenate((vertexes_temp, plant2))
-vertexes_temp = np.concatenate((vertexes_temp, dino))
+vertexes_temp = np.concatenate((vertexes_temp, bird))
 
 
 vertexes = np.zeros(len(vertexes_temp), [("position", np.float32, 3)])
 vertexes['position'] = vertexes_temp
 
-textures_temp = textures_shrek + textures_bathroom + textures_house + textures_sky + textures_drawer + textures_vase + textures_rose + textures_bed + textures_ground + textures_plant1 + textures_plant2 + textures_dino 
+textures_temp = textures_shrek + textures_bathroom + textures_house + textures_sky + textures_drawer + textures_vase + textures_rose + textures_bed + textures_ground + textures_plant1 + textures_plant2 + textures_bird
 textures = np.zeros(len(textures_temp), [("position", np.float32, 2)])
 textures['position'] = textures_temp
 
@@ -155,8 +155,9 @@ loc_model = glGetUniformLocation(program, "model")
 while not glfw.window_should_close(window):
     # Reading user interactions.
     glfw.poll_events()
-    kb.sun_rot += kb.sun_speed
-    kb.person_step += kb.person_speed
+
+    kb.bird_angle = (kb.bird_angle + kb.bird_speed) % 360
+    print(kb.bird_speed, kb.bird_angle)
 
     # Activating the polygon view mode.
     if kb.polyMode:
@@ -180,7 +181,8 @@ while not glfw.window_should_close(window):
     draw_vase(loc_model, loc_color, index_vertexes)
     draw_rose(loc_model, loc_color, index_vertexes)
     draw_bed(loc_model, loc_color, index_vertexes)
-    draw_ground(loc_model, loc_color,index_vertexes)
+    draw_ground(loc_model, loc_color, index_vertexes)
+    draw_bird(loc_model, loc_color, index_vertexes)
 
     mat_view, loc_view = get_view(program)
     glUniformMatrix4fv(loc_view, 1, GL_TRUE, mat_view)
