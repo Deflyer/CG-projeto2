@@ -257,12 +257,12 @@ def draw_shrek(loc_model, loc_color, size):
 def draw_bird(loc_model, loc_color, size):
     # rotate
     
-    angle = 110.0
+    angle = - ( (360 * kb.bird_angle) / (2 * math.pi) )
     r_x = 0.0; r_y = 1.0; r_z = 0.0
+    print('---> ', angle)
     
     # translade
     t_x = kb.bird_radius * math.cos(kb.bird_angle); t_y = 50.0; t_z = kb.bird_radius * math.sin(kb.bird_angle)
-    print('~~~> ', t_x, t_y, t_z)
     
     # scale
     s_x = 0.05; s_y = 0.05; s_z = 0.05
