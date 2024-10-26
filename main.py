@@ -157,7 +157,6 @@ while not glfw.window_should_close(window):
     glfw.poll_events()
 
     kb.bird_angle = (kb.bird_angle + kb.bird_speed) % 360
-    print(kb.bird_speed, kb.bird_angle)
 
     # Activating the polygon view mode.
     if kb.polyMode:

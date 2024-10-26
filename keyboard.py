@@ -22,7 +22,7 @@ lastY =  700/2
 
 # Geometric transformations auxiliar variables.
 rose_scale_y = 0.05
-bird_speed = 0.01
+bird_speed = 0.00
 bird_radius = 80.0
 bird_angle = 0.0
 
