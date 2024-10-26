@@ -20,11 +20,15 @@ pitch = 0.0
 lastX =  700/2
 lastY =  700/2
 
+# Geometric transformations auxiliar variables.
+rose_scale_y = 0.05
+
 def key_event(window,key,scancode,action,mods):
     global polyMode
     global cameraPos
     global cameraFront
     global cameraUp
+    global rose_scale_y
 
     cameraSpeed = 0.4
     
@@ -42,6 +46,15 @@ def key_event(window,key,scancode,action,mods):
 
     if key == 80 and action == glfw.PRESS: 
         polyMode = not polyMode
+
+    if key == 265 and action == glfw.PRESS: # tecla seta pra cima (rosa cresce).
+        aux = rose_scale_y + 0.01
+        rose_scale_y = min(aux, 0.13)
+
+    if key == 264 and action == glfw.PRESS: # tecla seta pra baixo (rosa diminui).
+        aux = rose_scale_y - 0.01
+        rose_scale_y = max(aux,0.05)
+        print('----> ', rose_scale_y)
 
 def mouse_event(window, xpos, ypos):
     global firstMouse, cameraFront, yaw, pitch, lastX, lastY
