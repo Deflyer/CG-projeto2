@@ -7,8 +7,8 @@ import glm
 
 polyMode = False
 tree_scale = 1
-sun_rot = 0
-sun_speed = 0
+shrek_step = 0
+shrek_side_step = 0
 person_step = 0
 person_speed = 0
 cameraPos   = glm.vec3(0.0,  0.0,  1.0)
@@ -25,20 +25,91 @@ def key_event(window,key,scancode,action,mods):
     global cameraPos
     global cameraFront
     global cameraUp
+    global shrek_step
+    global shrek_side_step
 
     cameraSpeed = 0.4
+
+    exclusion_zones = [
+        (-8, -30, 6, 1),
+        (5, -9, 25, -2),             
+        ]
     
     if key == 87 and (action==1 or action==2): # tecla W
-        cameraPos += cameraSpeed * cameraFront
+        valid = True
+        nova_pos = cameraPos + cameraSpeed * cameraFront
+        if glm.length(nova_pos) >= 66 or nova_pos[1] < -0.5:
+             valid = False
+        if valid:
+            cameraPos = nova_pos
     
     if key == 83 and (action==1 or action==2): # tecla S
-        cameraPos -= cameraSpeed * cameraFront
+        valid = True
+        nova_pos = cameraPos - cameraSpeed * cameraFront
+        if glm.length(nova_pos) >= 66 or nova_pos[1] < -0.5:
+             valid = False
+        if valid:
+            cameraPos = nova_pos
     
-    if key == 65 and (action==1 or action==2): # tecla A
-        cameraPos -= glm.normalize(glm.cross(cameraFront, cameraUp)) * cameraSpeed
+    if key == 65 and (action==1 or action==2): # tecla 
+        valid = True
+        nova_pos = cameraPos - glm.normalize(glm.cross(cameraFront, cameraUp)) * cameraSpeed
+        if glm.length(nova_pos) >= 66 or nova_pos[1] < -0.5:
+             valid = False
+        if valid:
+            cameraPos = nova_pos
         
     if key == 68 and (action==1 or action==2): # tecla D
-        cameraPos += glm.normalize(glm.cross(cameraFront, cameraUp)) * cameraSpeed
+        valid = True
+        nova_pos = cameraPos + glm.normalize(glm.cross(cameraFront, cameraUp)) * cameraSpeed
+        if glm.length(nova_pos) >= 66 or nova_pos[1] < -0.5:
+             valid = False
+        if valid:
+            cameraPos = nova_pos
+
+    if key == 73 and (action==1 or action==2): # tecla I
+        valid = True
+        for zone in exclusion_zones:
+                x_min, z_min, x_max, z_max = zone
+                if (x_min <= shrek_side_step <= x_max) and (z_min <= shrek_step + 1.9 <= z_max):
+                    valid = False
+        if(shrek_side_step **2  + (shrek_step - 0.5) ** 2 >= 3600):
+             valid = False
+        if valid:
+            shrek_step -= 0.5 
+        
+    if key == 75 and (action==1 or action==2): # tecla K
+        valid = True
+        for zone in exclusion_zones:
+                x_min, z_min, x_max, z_max = zone
+                if (x_min <= shrek_side_step <= x_max) and (z_min <= shrek_step + 2.1 <= z_max):
+                    valid = False
+        if(shrek_side_step **2  + (shrek_step + 0.5) ** 2 >= 3600):
+             valid = False
+        if valid:
+            shrek_step += 0.5 
+
+    if key == 74 and (action==1 or action==2): # tecla J
+        valid = True
+        for zone in exclusion_zones:
+                x_min, z_min, x_max, z_max = zone
+                if (x_min <= shrek_side_step -0.5 <= x_max) and (z_min <= shrek_step + 2 <= z_max):
+                    valid = False
+        if((shrek_side_step - 0.5) **2  + (shrek_step) ** 2 >= 3600):
+             valid = False
+        if valid:
+            shrek_side_step -= 0.5 
+
+    if key == 76 and (action==1 or action==2): # tecla L
+        valid = True
+        for zone in exclusion_zones:
+                x_min, z_min, x_max, z_max = zone
+                if (x_min <= shrek_side_step +0.5 <= x_max) and (z_min <= shrek_step + 2 <= z_max):
+                    valid = False
+        if((shrek_side_step + 0.5) **2  + (shrek_step) ** 2 >= 3600):
+             valid = False
+        if valid:
+            shrek_side_step += 0.5 
 
     if key == 80 and action == glfw.PRESS: 
         polyMode = not polyMode
