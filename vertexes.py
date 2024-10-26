@@ -269,7 +269,7 @@ def get_vertexes_plant2():
     size = []
     textures_coord_list = []
 
-    modelo = load_model_from_file('objects/plant/grama2.obj')
+    modelo = load_model_from_file('objects/plant/plant2.obj')
 
     # Allow for more the one texture.
     faces_visited = []

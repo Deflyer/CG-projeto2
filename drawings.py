@@ -24,7 +24,7 @@ def draw_bathroom(loc_model, loc_color, size):
 
 def draw_drawer(loc_model, loc_color, size):    
     # rotate
-    angle = 90.0
+    angle = 180.0
     r_x = 0.0; r_y = 1.0; r_z = 0.0
     
     # translade
@@ -121,7 +121,7 @@ def draw_ground(loc_model, loc_color, size):
     t_x = 0.0; t_y = -1.0; t_z = 0.0
     
     # scale
-    s_x = 60; s_y = 60; s_z = 60
+    s_x = 70; s_y = 70; s_z = 70
     
     mat_model = get_mat_model(angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
     glUniformMatrix4fv(loc_model, 1, GL_TRUE, mat_model)

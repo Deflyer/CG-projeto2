@@ -172,7 +172,7 @@ while not glfw.window_should_close(window):
     draw_bathroom(loc_model, loc_color, index_vertexes)
     draw_plant1(loc_model, loc_color,index_vertexes)
     draw_plant2(loc_model, loc_color,index_vertexes)
-    draw_dino(loc_model, loc_color,index_vertexes)
+    # draw_dino(loc_model, loc_color,index_vertexes)
     draw_house(loc_model, loc_color, index_vertexes)
     draw_shrek(loc_model, loc_color, index_vertexes)
     draw_sky(loc_model, loc_color, index_vertexes)
