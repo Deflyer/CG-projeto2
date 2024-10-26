@@ -126,11 +126,15 @@ def key_event(window,key,scancode,action,mods):
         aux = rose_scale_y + 0.01
         rose_scale_y = min(aux, 0.13)
 
+    if key == 264 and action == glfw.PRESS: # tecla seta pra baixo (rosa diminui).
+        aux = rose_scale_y - 0.01
+        rose_scale_y = max(aux,0.05)
+
     if key == 262 and action == glfw.PRESS: # tecla seta pra direita.
         aux = bird_speed + 0.01
         bird_speed = min(aux, 0.05)
 
-    if key == 263 and action == glfw.PRESS: # tecla seta pra baixo.
+    if key == 263 and action == glfw.PRESS: # tecla seta pra esquerda.
         aux = bird_speed - 0.01
         bird_speed = max(aux, 0.0)
 

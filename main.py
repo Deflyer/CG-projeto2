@@ -151,12 +151,15 @@ loc_model = glGetUniformLocation(program, "model")
 
 #-----------------------------------------------------------------------------------
 
+sky_rotation_angle = 0.0
+
 # Code main loop.
 while not glfw.window_should_close(window):
     # Reading user interactions.
     glfw.poll_events()
 
     kb.bird_angle = (kb.bird_angle + kb.bird_speed) % 360
+    sky_rotation_angle = (sky_rotation_angle + 0.1) % 360
 
     # Activating the polygon view mode.
     if kb.polyMode:
@@ -174,7 +177,7 @@ while not glfw.window_should_close(window):
     draw_plant2(loc_model, loc_color,index_vertexes, positions2)
     draw_house(loc_model, loc_color, index_vertexes)
     draw_shrek(loc_model, loc_color, index_vertexes)
-    draw_sky(loc_model, loc_color, index_vertexes)
+    draw_sky(loc_model, loc_color, index_vertexes, sky_rotation_angle)
     draw_drawer(loc_model, loc_color, index_vertexes)
     draw_vase(loc_model, loc_color, index_vertexes)
     draw_rose(loc_model, loc_color, index_vertexes)

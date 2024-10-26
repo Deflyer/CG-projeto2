@@ -231,7 +231,7 @@ def get_vertexes_sky():
 
     size.append(len(vertexes))
     
-    load_texture_from_file(4,'objects/sky/ceu.jpg')
+    load_texture_from_file(4,'objects/sky/sky.jpg')
     return vertexes, size, textures_coord_list
 
 

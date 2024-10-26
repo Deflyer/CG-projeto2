@@ -94,9 +94,8 @@ def draw_bed(loc_model, loc_color, size):
     glBindTexture(GL_TEXTURE_2D, 8)
     glDrawArrays(GL_TRIANGLES, size['bed'][0], size['bed'][1] - size['bed'][0]) ## renderizando
 
-def draw_sky(loc_model, loc_color, size):    
+def draw_sky(loc_model, loc_color, size, angle):    
     # rotate
-    angle = 0.0
     r_x = 0.0; r_y = 1.0; r_z = 0
     
     # translade
@@ -208,7 +207,6 @@ def draw_bird(loc_model, loc_color, size):
     
     angle = - ( (360 * kb.bird_angle) / (2 * math.pi) )
     r_x = 0.0; r_y = 1.0; r_z = 0.0
-    print('---> ', angle)
     
     # translade
     t_x = kb.bird_radius * math.cos(kb.bird_angle); t_y = 50.0; t_z = kb.bird_radius * math.sin(kb.bird_angle)
