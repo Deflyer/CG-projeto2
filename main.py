@@ -89,14 +89,14 @@ for value in coords_ground:
 start = len(ground) + start
 
 # Creating the plant1.
-plant1, coords_plant1, textures_plant1 = get_vertexes_plant1()
+plant1, coords_plant1, textures_plant1, positions1 = get_vertexes_plant1()
 index_vertexes['plant1'] = [start]
 for value in coords_plant1:
     index_vertexes['plant1'].append(index_vertexes['plant1'][-1] + value)
 start = len(plant1) + start
 
 # Creating the plant2.
-plant2, coords_plant2, textures_plant2 = get_vertexes_plant2()
+plant2, coords_plant2, textures_plant2, positions2 = get_vertexes_plant2()
 index_vertexes['plant2'] = [start]
 for value in coords_plant2:
     index_vertexes['plant2'].append(index_vertexes['plant2'][-1] + value)
@@ -170,9 +170,8 @@ while not glfw.window_should_close(window):
 
     # Drawing the objects.
     draw_bathroom(loc_model, loc_color, index_vertexes)
-    draw_plant1(loc_model, loc_color,index_vertexes)
-    draw_plant2(loc_model, loc_color,index_vertexes)
-    # draw_dino(loc_model, loc_color,index_vertexes)
+    draw_plant1(loc_model, loc_color,index_vertexes, positions1)
+    draw_plant2(loc_model, loc_color,index_vertexes, positions2)
     draw_house(loc_model, loc_color, index_vertexes)
     draw_shrek(loc_model, loc_color, index_vertexes)
     draw_sky(loc_model, loc_color, index_vertexes)

@@ -5,6 +5,7 @@ import numpy as np
 from geometric_transf import *
 from PIL import Image
 from OpenGL.GL import *
+import random
 
 def load_texture_from_file(texture_id, img_textura):
     '''
@@ -258,7 +259,39 @@ def get_vertexes_plant1():
 
     load_texture_from_file(11,'objects/plant/plant1.png')
     size.append(len(vertexes))
-    return vertexes, size, textures_coord_list
+
+    positions = []
+  
+    exclusion_zones = [
+    (-8, -30, 6, 60),
+    (5, -9, 25, -2),             
+    ]
+    
+    # Calcula posições fixas para as plantas
+    for i in range(3):
+        min_radius = 14 * (i + 1)
+        max_radius = 14 * (i + 2)
+        num_plants = 120 + 50 * i
+        angle_step = 360 / num_plants
+        for j in range(num_plants):
+            angle_rad = math.radians(j * angle_step + random.uniform(-10, 10))  # Pequena variação de ângulo
+            radius = random.uniform(min_radius, max_radius)  # Raio aleatório entre min_radius e max_radius
+            t_x = radius * math.cos(angle_rad)  # Coordenada x ao longo do círculo
+            t_y = -1.0                          # Mantém a altura y em -1
+            t_z = radius * math.sin(angle_rad)  # Coordenada z ao longo do círculo
+            angle = random.uniform(0, 360)  # Aleatoriza a rotação da planta
+            s_x = random.uniform(0.5, 0.7) + 0.2*i   # Escala aleatória entre 0.3 e 0.7
+            s_y = s_x                         # Mantém a escala uniforme
+            s_z = random.uniform(0.5, 0.7) + 0.2*i   # Escala aleatória para a profundidade
+            valid = True
+            for zone in exclusion_zones:
+                x_min, z_min, x_max, z_max = zone
+                if (x_min <= t_x <= x_max) and (z_min <= t_z <= z_max):
+                    valid = False
+            if valid:
+                positions.append((t_x, t_y, t_z, angle, s_x, s_y, s_z))
+
+    return vertexes, size, textures_coord_list, positions
 
 def get_vertexes_plant2():
     '''
@@ -284,7 +317,39 @@ def get_vertexes_plant2():
 
     load_texture_from_file(12,'objects/plant/plant2.png')
     size.append(len(vertexes))
-    return vertexes, size, textures_coord_list
+
+    positions = []
+  
+    exclusion_zones = [
+    (-8, -30, 6, 0),
+    (5, -9, 25, -2),             
+    ]
+    
+    # Calcula posições fixas para as plantas
+    for i in range(3):
+        min_radius = 3 * (i + 1)
+        max_radius = 3 * (i + 2)
+        num_plants = 10
+        angle_step = (360 / num_plants) + random.uniform(0, 45)
+        for j in range(num_plants):
+            angle_rad = math.radians(j * angle_step + random.uniform(-10, 10))  # Pequena variação de ângulo
+            radius = random.uniform(min_radius, max_radius)  # Raio aleatório entre min_radius e max_radius
+            t_x = radius * math.cos(angle_rad)  # Coordenada x ao longo do círculo
+            t_y = -1.0                          # Mantém a altura y em -1
+            t_z = radius * math.sin(angle_rad)  # Coordenada z ao longo do círculo
+            angle = random.uniform(0, 360)  # Aleatoriza a rotação da planta
+            s_x = random.uniform(0.01, 0.02) + 0.005*i   # Escala aleatória entre 0.3 e 0.7
+            s_y = s_x                         # Mantém a escala uniforme
+            s_z = random.uniform(0.01, 0.02) + 0.005*i   # Escala aleatória para a profundidade
+            valid = True
+            for zone in exclusion_zones:
+                x_min, z_min, x_max, z_max = zone
+                if (x_min <= t_x <= x_max) and (z_min <= t_z <= z_max):
+                    valid = False
+            if valid:
+                positions.append((t_x, t_y, t_z, angle, s_x, s_y, s_z))
+
+    return vertexes, size, textures_coord_list, positions
 
 def get_vertexes_bird():
     '''

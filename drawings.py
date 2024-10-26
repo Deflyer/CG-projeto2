@@ -97,7 +97,7 @@ def draw_bed(loc_model, loc_color, size):
 def draw_sky(loc_model, loc_color, size):    
     # rotate
     angle = 0.0
-    r_x = 0.0; r_y = 0.0; r_z = 1.0
+    r_x = 0.0; r_y = 1.0; r_z = 0
     
     # translade
     t_x = 0.0; t_y = -45; t_z = 0.0
@@ -130,24 +130,6 @@ def draw_ground(loc_model, loc_color, size):
     glBindTexture(GL_TEXTURE_2D, 9)
     glDrawArrays(GL_TRIANGLE_STRIP, size['ground'][0], size['ground'][1] - size['ground'][0])
 
-def draw_plant(loc_model, loc_color, size):
-    # rotate
-    angle = 0
-    r_x = 0.0; r_y = 0.0; r_z = 1.0
-    
-    # translade
-    t_x = 0; t_y = 0; t_z = 0 
-    
-    # scale
-    s_x = 0.1; s_y = 0.1; s_z = 0.1
-    
-    mat_model = get_mat_model(angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
-    glUniformMatrix4fv(loc_model, 1, GL_TRUE, mat_model)
-
-    # draws the vase
-    glBindTexture(GL_TEXTURE_2D, 10)
-    glDrawArrays(GL_TRIANGLES, size['plant'][0], size['plant'][1] - size['plant'][0]) ## renderizando
-
 def draw_house(loc_model, loc_color, size):    
     # rotate
     angle = 180
@@ -163,70 +145,37 @@ def draw_house(loc_model, loc_color, size):
     glUniformMatrix4fv(loc_model, 1, GL_TRUE, mat_model)
     
     # draws each house face with a texture 
-    # print(len(size['house']))
     for i in range(len(size['house']) - 1):
         glBindTexture(GL_TEXTURE_2D, 2)
         glDrawArrays(GL_TRIANGLES, size['house'][i], size['house'][i +1] - size['house'][i]) ## renderizandoS 
 
-def draw_plant1(loc_model, loc_color, size):    
-    # rotate
-    angle = 180
-    r_x = 0.0; r_y = 1.0; r_z = 0
-    
-    # translade
-    t_x = 0.0; t_y = -1.0; t_z = 5.0
-    
-    # scale
-    s_x = 0.5; s_y = 0.5; s_z = 0.5
-    
-    mat_model = get_mat_model(angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
-    glUniformMatrix4fv(loc_model, 1, GL_TRUE, mat_model)
-    
-    # draws each plant1 face with a texture 
-    # print(len(size['plant1']))
-    for i in range(len(size['plant1']) - 1):
-        glBindTexture(GL_TEXTURE_2D,11)
-        glDrawArrays(GL_TRIANGLES, size['plant1'][i], size['plant1'][i +1] - size['plant1'][i])
+def draw_plant1(loc_model, loc_color, size, positions):
+     for (t_x, t_y, t_z, angle, s_x, s_y, s_z) in positions:
+        # Gira a planta com o ângulo aleatório fornecido
+        r_x = 0.0; r_y = 1.0; r_z = 0
+        
+        # Gera a matriz de transformação para cada planta
+        mat_model = get_mat_model(angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
+        glUniformMatrix4fv(loc_model, 1, GL_TRUE, mat_model)
+        
+        # Desenha a planta com a textura
+        for j in range(len(size['plant1']) - 1):
+            glBindTexture(GL_TEXTURE_2D, 11)
+            glDrawArrays(GL_TRIANGLES, size['plant1'][j], size['plant1'][j + 1] - size['plant1'][j])
 
-def draw_plant2(loc_model, loc_color, size):    
-    # rotate
-    angle = 180
-    r_x = 0.0; r_y = 1.0; r_z = 0
-    
-    # translade
-    t_x = 0.0; t_y = -1.0; t_z = 0.0
-    
-    # scale
-    s_x = 0.02; s_y = 0.02; s_z = 0.02
-    
-    mat_model = get_mat_model(angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
-    glUniformMatrix4fv(loc_model, 1, GL_TRUE, mat_model)
-    
-    # draws each plant2 face with a texture 
-    # print(len(size['plant2']))
-    for i in range(len(size['plant2']) - 1):
-        glBindTexture(GL_TEXTURE_2D, 12)
-        glDrawArrays(GL_TRIANGLES, size['plant2'][i], size['plant2'][i +1] - size['plant2'][i])
+def draw_plant2(loc_model, loc_color, size, positions):    
+    for (t_x, t_y, t_z, angle, s_x, s_y, s_z) in positions:
+        r_x = 0.0; r_y = 1.0; r_z = 0
 
-def draw_dino(loc_model, loc_color, size):    
-    # rotate
-    angle = 180
-    r_x = 0.0; r_y = 1.0; r_z = 0
-    
-    # translade
-    t_x = 0.0; t_y = -1.0; t_z = 0.0
-    
-    # scale
-    s_x = 0.02; s_y = 0.02; s_z = 0.02
-    
-    mat_model = get_mat_model(angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
-    glUniformMatrix4fv(loc_model, 1, GL_TRUE, mat_model)
-    
-    # draws each dino face with a texture 
-    # print(len(size['dino']))
-    for i in range(len(size['dino']) - 1):
-        glBindTexture(GL_TEXTURE_2D, 13)
-        glDrawArrays(GL_TRIANGLES, size['dino'][i], size['dino'][i +1] - size['dino'][i])
+        
+        mat_model = get_mat_model(angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
+        glUniformMatrix4fv(loc_model, 1, GL_TRUE, mat_model)
+        
+        # draws each plant2 face with a texture 
+        for i in range(len(size['plant2']) - 1):
+            glBindTexture(GL_TEXTURE_2D, 12)
+            glDrawArrays(GL_TRIANGLES, size['plant2'][i], size['plant2'][i +1] - size['plant2'][i]) 
+
 
 def draw_shrek(loc_model, loc_color, size):
     # rotate
@@ -235,7 +184,7 @@ def draw_shrek(loc_model, loc_color, size):
     r_x = 0.0; r_y = 1.0; r_z = 0.0
     
     # translade
-    t_x = 0.0; t_y = -1.0; t_z = 2.0
+    t_x = 0.0 + kb.shrek_side_step; t_y = -1.0; t_z = 2.0 + kb.shrek_step
     
     # scale
     s_x = 2.8; s_y = 2.8; s_z = 2.8
