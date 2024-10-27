@@ -14,6 +14,7 @@ person_speed = 0
 cameraPos   = glm.vec3(0.0,  0.0,  1.0)
 cameraFront = glm.vec3(0.0,  0.0, -1.0)
 cameraUp    = glm.vec3(0.0,  1.0,  0.0)
+skyfix    = glm.vec3(0.0,  -72.0,  0.0)
 firstMouse = True
 yaw = -90.0 
 pitch = 0.0
@@ -46,7 +47,10 @@ def key_event(window,key,scancode,action,mods):
     if key == 87 and (action==1 or action==2): # tecla W
         valid = True
         nova_pos = cameraPos + cameraSpeed * cameraFront
-        if glm.length(nova_pos) >= 66 or nova_pos[1] < -0.5:
+        if glm.length(nova_pos + skyfix) >= 96 or nova_pos[1] < -0.5:
+             print(glm.length(nova_pos + skyfix))
+             print(nova_pos)
+             print(cameraPos)
              valid = False
         if valid:
             cameraPos = nova_pos
@@ -54,15 +58,15 @@ def key_event(window,key,scancode,action,mods):
     if key == 83 and (action==1 or action==2): # tecla S
         valid = True
         nova_pos = cameraPos - cameraSpeed * cameraFront
-        if glm.length(nova_pos) >= 66 or nova_pos[1] < -0.5:
+        if glm.length(nova_pos +skyfix) >= 96 or nova_pos[1] < -0.5:
              valid = False
         if valid:
             cameraPos = nova_pos
     
-    if key == 65 and (action==1 or action==2): # tecla 
+    if key == 65 and (action==1 or action==2): # tecla A
         valid = True
         nova_pos = cameraPos - glm.normalize(glm.cross(cameraFront, cameraUp)) * cameraSpeed
-        if glm.length(nova_pos) >= 66 or nova_pos[1] < -0.5:
+        if glm.length(nova_pos + skyfix) >= 96 or nova_pos[1] < -0.5:
              valid = False
         if valid:
             cameraPos = nova_pos
@@ -70,7 +74,7 @@ def key_event(window,key,scancode,action,mods):
     if key == 68 and (action==1 or action==2): # tecla D
         valid = True
         nova_pos = cameraPos + glm.normalize(glm.cross(cameraFront, cameraUp)) * cameraSpeed
-        if glm.length(nova_pos) >= 66 or nova_pos[1] < -0.5:
+        if glm.length(nova_pos +skyfix) >= 96 or nova_pos[1] < -0.5:
              valid = False
         if valid:
             cameraPos = nova_pos
