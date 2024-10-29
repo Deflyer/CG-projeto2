@@ -158,12 +158,20 @@ def get_projection(program):
     return projection_matrix(), glGetUniformLocation(program, "projection")
 
 def view_matrix():
+    '''
+    Returns the view matrix based on camera vectors (position, front, up).
+    '''
+
     mat_view = glm.lookAt(kb.cameraPos, kb.cameraPos + kb.cameraFront, kb.cameraUp)
     mat_view = np.array(mat_view)
     return mat_view
 
 def projection_matrix():
-    # perspective parameters: fovy, aspect, near, far
+    '''
+    Returns the projection matrix based on fovy, aspect ratio, near and far parameters.
+    '''
+    
+    # Perspective parameters: fovy, aspect, near, far.
     mat_projection = glm.perspective(glm.radians(45.0), WIDTH/HEIGHT, 0.1, 1000.0)
     
     mat_projection = np.array(mat_projection)    
