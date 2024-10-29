@@ -5,7 +5,7 @@
 - Gabriel da Costa Merlin [12544420]
 
 ## Scene
-Our scene contains a ground plane covered by a spherical Skybox. In this dome, we have a house that divides the internal and the external parts. The internal one is the inside of the house, containing a bed, a drawer a a vase with a rose flower. The external one have a character (Shrek), two types of ramdomized placed plants, a flying bird and an outide house bathroom.
+Our scene contains a ground plane covered by a spherical Skybox. In this dome, we have a house that divides the internal and the external parts. The internal one is the inside of the house, containing a bed, a drawer a a vase with a rose flower. The external one have a character (Shrek), two types of ramdomized placed plants, a flying bird and an outside house bathroom.
 
 It is possible to interact with the scene by pressing some buttons:
 - 'w': camera forward movement
@@ -14,8 +14,8 @@ It is possible to interact with the scene by pressing some buttons:
 - 'd': camera right movement
 - mouse: change camera view
 - '↑': Scale up rose
-- '←': Slow down bird (decreases rotation speed)
 - '↓': Scale down rose
+- '←': Slow down bird (decreases rotation speed)
 - '→': Speed up  bird (increases rotation speed)
 - 'p': Enter/exit polygon mode view
 - 'i': Shrek forward movement
