@@ -69,12 +69,10 @@ def create_program():
     glCompileShader(vertex)
     if not glGetShaderiv(vertex, GL_COMPILE_STATUS):
         error = glGetShaderInfoLog(vertex).decode()
-        print(error)
         raise RuntimeError("Error compiling Vertex Shader.")
     glCompileShader(fragment)
     if not glGetShaderiv(fragment, GL_COMPILE_STATUS):
         error = glGetShaderInfoLog(fragment).decode()
-        print(error)
         raise RuntimeError("Error compiling Fragment Shader.")
 
     # Attach shader objects to the program.
@@ -84,7 +82,6 @@ def create_program():
     # Build program.
     glLinkProgram(program)
     if not glGetProgramiv(program, GL_LINK_STATUS):
-        print(glGetProgramInfoLog(program))
         raise RuntimeError('Error linking the program.')
         
     # Make program the default program.

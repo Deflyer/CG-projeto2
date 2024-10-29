@@ -49,7 +49,7 @@ def key_event(window,key,scancode,action,mods):
 
     cameraSpeed = 0.4
 
-    # Where Shrek can't go.
+    # Where Shrek shouldn't go.
     exclusion_zones = [
         (-8, -30, 6, 1),
         (5, -9, 25, -2),             
@@ -60,9 +60,6 @@ def key_event(window,key,scancode,action,mods):
         valid = True
         nova_pos = cameraPos + cameraSpeed * cameraFront
         if glm.length(nova_pos + skyfix) >= 96 or nova_pos[1] < -0.5:
-             print(glm.length(nova_pos + skyfix))
-             print(nova_pos)
-             print(cameraPos)
              valid = False
         if valid:
             cameraPos = nova_pos

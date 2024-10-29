@@ -45,19 +45,19 @@ drawer, coords_drawer, textures_drawer = get_vertexes_drawer()
 index_vertexes, start = create_object(index_vertexes, drawer, coords_drawer, 'drawer', start)
 
 # Creating the vase.
-vase, coords_vase, textures_vase = get_textures_vase()
+vase, coords_vase, textures_vase = get_vertexes_vase()
 index_vertexes, start = create_object(index_vertexes, vase, coords_vase, 'vase', start)
 
 # Creating the rose.
-rose, coords_rose, textures_rose = get_textures_rose()
+rose, coords_rose, textures_rose = get_vertexes_rose()
 index_vertexes, start = create_object(index_vertexes, rose, coords_rose, 'rose', start)
 
 # Creating the bed.
-bed, coords_bed, textures_bed = get_textures_bed()
+bed, coords_bed, textures_bed = get_vertexes_bed()
 index_vertexes, start = create_object(index_vertexes, bed, coords_bed, 'bed', start)
 
 # Creating the ground.
-ground, coords_ground, textures_ground = get_textures_ground()
+ground, coords_ground, textures_ground = get_vertexes_ground()
 index_vertexes, start = create_object(index_vertexes, ground, coords_ground, 'ground', start)
 
 # Creating the plant1.
